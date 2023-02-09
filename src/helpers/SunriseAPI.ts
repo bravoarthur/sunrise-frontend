@@ -1,6 +1,14 @@
 import Cookies from "js-cookie"
 import qs from 'qs'
 
+type ListType = {
+    idProduct: string,
+    product: string,
+    qtd: number,
+    unit: string,
+    image: string
+}
+
 type BodyType = {
     email?: string,
     password?: string,
@@ -12,7 +20,12 @@ type BodyType = {
     image?: string,
     unit?: string,
     newProduct?: string,
-    newCategory?: string
+    newCategory?: string,
+    newSuplier?: string,
+    idAdm?: string,
+    idSuplier?: string,
+    listOrder?: ListType[],
+    desc?: string,
 
 }
 
@@ -124,6 +137,14 @@ const BravoStoreAPI = {
 
     },
 
+    getSupliersList: async (options: {}, ) => {
+
+        const json = await apiFetchGet(`/suplier/list`, options) 
+        
+        return json.suplierList
+
+    },
+
     addProduct: async (name: string, unit: string, category: string, image?: string) => {
 
         const json = await apiFetchPost('/products/add', {newProduct: name, unit: unit, category: category}) 
@@ -140,8 +161,24 @@ const BravoStoreAPI = {
 
     },
 
+    addSuplier: async (name: string) => {
+
+        const json = await apiFetchPost('/suplier/add', {newSuplier: name}) 
+
+        return json
+
+    },
+
+    addOrder: async (idAdm: string, idSuplier: string, listOrder: ListType[], desc: string) => {
+
+        const json = await apiFetchPost('/order/add', {idAdm: idAdm, idSuplier: idSuplier, listOrder: listOrder, desc: desc}) 
+
+        return json
+
+    },
 
 
+    
 
 
 

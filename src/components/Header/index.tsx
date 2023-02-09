@@ -36,7 +36,7 @@ function Header() {
                                     <button onClick={handleLogOut}>Logout</button>
                                 </li>   
                                 <li>
-                                    <Link to="" className={styles.sellButton}>NEW ORDER</Link>
+                                    <Link to="/neworder" className={styles.sellButton}>NEW ORDER</Link>
                                 </li>
                             </>
                         

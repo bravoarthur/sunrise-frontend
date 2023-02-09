@@ -55,7 +55,7 @@ function SignUp() {
             setDisabled(false)
             return
         } else {
-            doLogin(json.token!)
+            doLogin(json.token!, false , json.user)
             setDisabled(false)
             navigate('/')   
             navigate(0)        

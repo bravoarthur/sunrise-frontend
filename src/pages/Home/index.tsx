@@ -19,6 +19,8 @@ type OrderType = {
     userChecker?: string,
     listOrder: ListType[],
     listCheck: ListType[],
+    admDesc?: string,
+    checkerDesc?: string,
 }
 
 
@@ -52,8 +54,29 @@ function Home() {
     return (
 
         <>
+            {
+                logged &&  
+
+                <div className={styles.pageContainer}>
+                    
+                    <div className={styles.buttonContainer}>
+                        <Link className={styles.buttons} to={`/addcategory`}>        
+                            Add Category
+                        </Link>     
+                        <Link className={styles.buttons} to={`/addsuplier`}>        
+                            Add suplier
+                        </Link>
+                        <Link className={styles.buttons} to={`/addproducts`}>        
+                            Add product
+                        </Link>          
+
+                    </div>
+
+                </div>         
+            }
+
             <div className={styles.pageContainer}>
-                <h3>Open Orders</h3>
+                <h3>{logged? 'Orders to Review' : 'Open Orders'}</h3>
                 <div className={styles.orderContainer}>
 
                     {orderList.map((item,index) => {
@@ -67,8 +90,7 @@ function Home() {
 
                                         
                               </Link>
-                    })}
-                    
+                    })}                  
 
 
 

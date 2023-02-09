@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import styles from "./AddCategory.module.scss"
+import styles from "./AddSuplier.module.scss"
 import useApi from '../../helpers/SunriseAPI'
 
 
@@ -10,7 +10,7 @@ type ErrorType = {
 }
 
 
-function AddCategory() {
+function AddSuplier() {
 
     const api = useApi    
 
@@ -49,7 +49,7 @@ function AddCategory() {
 
         <div className={styles.pageContainer}>
 
-            <div className={styles.pageTitle}> <h1>Add New Category</h1></div>
+            <div className={styles.pageTitle}> <h1>Add New Suplier</h1></div>
 
             <div className={styles.pageArea} >
                 {error.param && 
@@ -85,4 +85,4 @@ function AddCategory() {
     );
 }
 
-export default AddCategory;
+export default AddSuplier;

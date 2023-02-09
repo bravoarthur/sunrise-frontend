@@ -9,6 +9,8 @@ import SignUp from './pages/Signup';
 import CheckOrder from './pages/CheckOrder';
 import AddProducts from './pages/AddProducts';
 import AddCategory from './pages/AddCategory';
+import AddSuplier from './pages/AddSuplier';
+import NewOrder from './pages/NewOrder';
 
 
 function App() {
@@ -25,8 +27,8 @@ function App() {
 				        <Route path='/checkitem/:id' element={<CheckOrder/>}/> 
                 <Route path='/addproducts' element={<AddProducts/>}/> 
                 <Route path='/addcategory' element={<AddCategory/>}/> 
-
-
+                <Route path='/addsuplier' element={<AddSuplier/>}/> 
+                <Route path='/neworder' element={<NewOrder/>}/>
 			</Routes>
 		<Footer/>
       

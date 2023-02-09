@@ -1,7 +1,8 @@
-import styles from './CheckOrder.module.scss'
+import styles from './NewOrder.module.scss'
 import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 type ListType = {
     idProduct: string,
@@ -16,6 +17,12 @@ type ErrorType = {
     msg: string
 }
 
+type Suplier={
+    _id: string,
+    name: string,
+    slug: string,
+}
+
 type OrderItemType = {
     _id: string,
     idSuplier: string,
@@ -27,8 +34,8 @@ type OrderItemType = {
     status: string,
     listOrder: ListType[],
     listCheck: ListType[],
-    admDesc: string,
-    checkerDesc: string,
+    admDesc?: string,
+    checkerDesc?: string,
 }
 
 type ProductsType = {
@@ -38,16 +45,15 @@ type ProductsType = {
     unit: string,
     image: string
 }
-           
+  
 
-const CheckOrder = () => {
-    
-    let {id} = useParams() 
-    
+
+const NewOrder = () => {
+
     const api = useApi
-    
+            
     const [products, setProducts] = useState([] as ProductsType[])
-    const [orderItem, setOrderItem] = useState({} as OrderItemType)    
+    const [supliersList, setSupliersList] = useState([] as Suplier[])
     const [list, setList] = useState([] as ListType[])
     const [description, setDescription] = useState('')
     const [suplier, setSuplier] = useState('')
@@ -56,23 +62,23 @@ const CheckOrder = () => {
         param: '',
         msg: ''
     })
-    
-
-    useEffect(() => {
-        const getOrder = async () => {
-            const order: OrderItemType = await  api.getOrderItem({}, id!)            
-            setOrderItem(order)
-        }
-        getOrder()
-    }, [api])   
-    
+    const userAdmin = Cookies.get('user')
+        
     useEffect(() => {
         const getProducts = async () => {
             const pList = await  api.getProductsList({})            
             setProducts(pList)
         }
         getProducts()
-    }, [api])   
+    }, [api])
+
+    useEffect(() => {
+        const getSupliersList = async () => {
+            const supList = await  api.getSupliersList({})            
+            setSupliersList(supList)
+        }
+        getSupliersList()
+    }, [api])
 
     console.log(list)
 
@@ -118,7 +124,10 @@ const CheckOrder = () => {
 
     const handleSendOrder = async () => {
 
-        
+        if(!userAdmin) {
+            setError({param: 'User', msg: 'UserAdmin Invalid - Please login Again'})
+            return
+        }
         if(suplier ==='') {
             setError({param: 'Suplier', msg: 'Plese Select the Suplier'})
             return
@@ -128,7 +137,7 @@ const CheckOrder = () => {
             setError({param: 'Order', msg: 'The List is Empty - Select at Least one item'})
             return
         } 
-/*
+
         const json = await api.addOrder(userAdmin, suplier, list, description)
 
         if(json.error) {
@@ -138,7 +147,7 @@ const CheckOrder = () => {
             setTimeout(() => {
                 setSuccess({param: '', msg: ''})
             }, 5000)
-        }*/
+        }
     }
 
 
@@ -160,18 +169,22 @@ const CheckOrder = () => {
             }
 
             <div className={styles.topInputs}>
-                <label className={styles.area}>
-                    <div>User</div>
+            <label className={styles.area}>
+                    <div>Note: </div>
                     <div>
-                        <input type="text" placeholder='Type your name...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
+                        <input type="text" placeholder='Insert a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
                     </div>
                 </label>
                 <label className={styles.area}>
-                    <div>Note: </div>
+                    <div>Select the Suplier: </div>
                     <div>
-                        <input type="text" placeholder='Type a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
+                        <select value={suplier} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setSuplier(event.target.value)}>
+                            <option></option>
+                            {supliersList.map((item, index) => <option value={item._id} key={item._id}>{item.name}</option>)}
+
+                        </select>
                     </div>
-                </label>                
+                </label>
 
             </div>
 
@@ -242,6 +255,4 @@ const CheckOrder = () => {
 }
 
 
-
-
-export default CheckOrder
+export default NewOrder

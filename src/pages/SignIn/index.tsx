@@ -6,7 +6,7 @@ import useApi from '../../helpers/SunriseAPI'
 
 type JsonType = {
     error?: any
-    email?: string,
+    user?: string,
     token?: string,
 }
 
@@ -43,7 +43,7 @@ function SignIn() {
             setDisabled(false)
             return
         } else {
-            doLogin(json.token!, rememberPass)
+            doLogin(json.token!, rememberPass, json.user!)
             setDisabled(false)
             navigate('/')   
             navigate(0)        
