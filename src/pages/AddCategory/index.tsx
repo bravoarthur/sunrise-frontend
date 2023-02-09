@@ -1,28 +1,18 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import styles from "./AddCategory.module.scss"
 import useApi from '../../helpers/SunriseAPI'
 
-type JsonType = {
-    error?: any
-    email?: string,
-    token?: string,
-}
+
 
 type ErrorType = {
     param: string,
     msg: string
 }
 
-type CategoriesType = {
-    _id: string,
-    name: string,
-    slug: string
-}
-
 
 function AddCategory() {
 
-    const api = useApi()    
+    const api = useApi    
 
     const [name, setName] = useState('')    
     const [disabled, setDisabled] = useState(false)

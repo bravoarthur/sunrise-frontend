@@ -1,33 +1,32 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import { doLogin } from "../../helpers/authHandler";
 import {useNavigate} from 'react-router-dom'
 import styles from "./SignUp.module.scss"
 import useApi from '../../helpers/SunriseAPI'
 
-type JsonType = {
+/*type JsonType = {
     error?: any
     email?: string,
     token?: string,
-}
+}*/
 
 type ErrorType = {
     param: string,
     msg: string
 }
 
-type StateType = {
+/*type StateType = {
     name: string,
     _id: string, 
-}
+}*/
 
 
 function SignUp() {
 
-    const api = useApi()
+    const api = useApi
     const navigate = useNavigate()
 
-    const [name, setName] = useState('')
-    const [stateLoc, setStateLoc] = useState('')
+    const [name, setName] = useState('')    
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPass] = useState('')

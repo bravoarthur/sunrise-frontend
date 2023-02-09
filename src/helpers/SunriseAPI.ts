@@ -139,7 +139,7 @@ const BravoStoreAPI = {
         return json
 
     },
-    
+
 
 
 
@@ -147,4 +147,4 @@ const BravoStoreAPI = {
 
 }
 
-export default () => BravoStoreAPI
+export default  BravoStoreAPI

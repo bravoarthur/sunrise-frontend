@@ -36,7 +36,7 @@ type ProductsType = {
 
 const CheckOrder = () => {
 
-    const api = useApi()
+    const api = useApi
     let {id} = useParams() 
     
     

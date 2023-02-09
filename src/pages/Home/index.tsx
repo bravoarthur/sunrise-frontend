@@ -22,22 +22,22 @@ type OrderType = {
 }
 
 
-
+/*
 type CategoriesType = {
     img: string,
     name: string,
     slug: string,
     _id: string
-}
+}*/
 
 function Home() {
 
-    const api = useApi()
+    const api = useApi
 
     const logged = isLogged()
 
     
-    const [categories, setCategories] = useState([] as CategoriesType[])
+    //const [categories, setCategories] = useState([] as CategoriesType[])
     const [orderList, setOrderList] = useState([] as OrderType[])
 
     useEffect(() => {
@@ -46,7 +46,7 @@ function Home() {
             setOrderList(olist)
         }
         getOrder()
-    }, [api])    
+    }, [api, logged])    
 
 
     return (

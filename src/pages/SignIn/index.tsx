@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import { doLogin } from "../../helpers/authHandler";
 import {useNavigate} from 'react-router-dom'
 import styles from "./SignIn.module.scss"
@@ -18,7 +18,7 @@ type ErrorType = {
 
 function SignIn() {
 
-    const api = useApi()
+    const api = useApi
     const navigate = useNavigate()
 
     const [email, setEmail] = useState('')

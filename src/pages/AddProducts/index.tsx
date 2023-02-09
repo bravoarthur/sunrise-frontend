@@ -1,26 +1,19 @@
 import {useState, useEffect} from 'react'
-import { doLogin } from "../../helpers/authHandler";
-import {useNavigate} from 'react-router-dom'
 import styles from "./AddProducts.module.scss"
 import useApi from '../../helpers/SunriseAPI'
 
-type JsonType = {
-    error?: any
-    email?: string,
-    token?: string,
-}
 
 type ErrorType = {
     param: string,
     msg: string
 }
 
-type ProductType = {
+/*type ProductType = {
     category: string;
     name: string;
     unit: "Kg" | 'Bag' | 'Tray' | 'Box' | 'Unit' | 'Default';
     image: string;    
-};
+};*/
 
 type CategoriesType = {
     _id: string,
@@ -32,7 +25,7 @@ type CategoriesType = {
 
 function AddProducts() {
 
-    const api = useApi()    
+    const api = useApi   
 
     const [name, setName] = useState('')
     const [unit, setUnit] = useState('')   
@@ -41,7 +34,7 @@ function AddProducts() {
     const [error, setError] = useState({} as ErrorType)
     const [success, setSuccess] = useState('')
     const [categories, setCategories] = useState([] as CategoriesType[])    
-    const [masterPass, setMasterPass] = useState('')
+    //const [masterPass, setMasterPass] = useState('')
 
     const units = ["Kg", 'Bag', 'Tray', 'Box', 'Unit','Default']
     
