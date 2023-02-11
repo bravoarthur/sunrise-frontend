@@ -1,7 +1,6 @@
 import styles from './NewOrder.module.scss'
 import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 type ListType = {
@@ -23,7 +22,7 @@ type Suplier={
     slug: string,
 }
 
-type OrderItemType = {
+/*type OrderItemType = {
     _id: string,
     idSuplier: string,
     suplierName: string,
@@ -36,7 +35,7 @@ type OrderItemType = {
     listCheck: ListType[],
     admDesc?: string,
     checkerDesc?: string,
-}
+}*/
 
 type ProductsType = {
     id: string,
@@ -57,6 +56,7 @@ const NewOrder = () => {
     const [list, setList] = useState([] as ListType[])
     const [description, setDescription] = useState('')
     const [suplier, setSuplier] = useState('')
+    const [blocked, setBlocked] = useState(false)
     const [error, setError] = useState({} as ErrorType)
     const [success, setSuccess] = useState({
         param: '',
@@ -124,17 +124,22 @@ const NewOrder = () => {
 
     const handleSendOrder = async () => {
 
+        setError({param: '', msg: ''})
+        setBlocked(true)
         if(!userAdmin) {
             setError({param: 'User', msg: 'UserAdmin Invalid - Please login Again'})
+            setBlocked(false)
             return
         }
         if(suplier ==='') {
             setError({param: 'Suplier', msg: 'Plese Select the Suplier'})
+            setBlocked(false)
             return
         } 
 
         if(list.length === 0) {
             setError({param: 'Order', msg: 'The List is Empty - Select at Least one item'})
+            setBlocked(false)
             return
         } 
 
@@ -142,11 +147,17 @@ const NewOrder = () => {
 
         if(json.error) {
             setError(json.error)
+            setBlocked(false)
         } else {
             setSuccess({param: 'Order', msg: 'Order Created Successfully'})
+            setBlocked(false)
+            setList([])
+            setSuplier('')
+            setDescription('') 
             setTimeout(() => {
                 setSuccess({param: '', msg: ''})
-            }, 5000)
+                window.location.reload();
+            }, 2500)
         }
     }
 
@@ -172,13 +183,13 @@ const NewOrder = () => {
             <label className={styles.area}>
                     <div>Note: </div>
                     <div>
-                        <input type="text" placeholder='Insert a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
+                        <input type="text" disabled={blocked} placeholder='Insert a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
                     </div>
                 </label>
                 <label className={styles.area}>
                     <div>Select the Suplier: </div>
                     <div>
-                        <select value={suplier} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setSuplier(event.target.value)}>
+                        <select value={suplier} disabled={blocked} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setSuplier(event.target.value)}>
                             <option></option>
                             {supliersList.map((item, index) => <option value={item._id} key={item._id}>{item.name}</option>)}
 
@@ -206,7 +217,7 @@ const NewOrder = () => {
                             <tr key={item.id}>
                                 <td>{item.name}</td>
                                 <td>{item.unit}</td>
-                                <td><input type="number" min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
+                                <td><input type="number" disabled={blocked} min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
                             </tr>                            
 
                             )}
@@ -245,7 +256,7 @@ const NewOrder = () => {
             </div>
             <div className={styles.buttonsArea}>
                 
-                <button className={styles.buttonSend} onClick={handleSendOrder}>Send List</button>
+                <button className={styles.buttonSend} disabled={blocked} onClick={handleSendOrder}>Send List</button>
             </div>            
         </div>
 

@@ -42,43 +42,43 @@ type ProductsType = {
 
 const CheckOrder = () => {
     
-    let {id} = useParams() 
+    let {id} = useParams()
     
     const api = useApi
     
-    const [products, setProducts] = useState([] as ProductsType[])
-    const [orderItem, setOrderItem] = useState({} as OrderItemType)    
+    //const [products, setProducts] = useState([] as ProductsType[])
+    const [orderList, setOrderList] = useState([] as ListType[])    
     const [list, setList] = useState([] as ListType[])
+    const [user, setUser] = useState('')
     const [description, setDescription] = useState('')
-    const [suplier, setSuplier] = useState('')
+    const [confirmClass, setConfirmClass] = useState(false)
+    const [blocked, setBlocked] = useState(false)    
     const [error, setError] = useState({} as ErrorType)
     const [success, setSuccess] = useState({
         param: '',
         msg: ''
     })
-    
+   
 
     useEffect(() => {
         const getOrder = async () => {
-            const order: OrderItemType = await  api.getOrderItem({}, id!)            
-            setOrderItem(order)
+            if(!id) {                
+                setError({param: 'List Error', msg: 'It Wastn Possible to Load the List, back Home e Try Again'})
+                return
+            }
+           
+            const order: OrderItemType = await  api.getOrderItem({}, id)            
+            
+            setOrderList(order.listOrder)
         }
         getOrder()
-    }, [api])   
-    
-    useEffect(() => {
-        const getProducts = async () => {
-            const pList = await  api.getProductsList({})            
-            setProducts(pList)
-        }
-        getProducts()
-    }, [api])   
-
+    }, [api, id])   
+   
     console.log(list)
 
-    const qtdHandler = (item: ProductsType, value:number) => {
+    const qtdHandler = (item: ListType, value:number) => {
         
-        const verifier = list.findIndex(it => item.id===it.idProduct)
+        const verifier = list.findIndex(it => item.idProduct===it.idProduct)
         if(verifier > -1) {
             const newList = list.map(item => item)
 
@@ -101,8 +101,8 @@ const CheckOrder = () => {
             if(value === 0) {
                 return
             } else {
-                const newItem: ListType = {idProduct: item.id,
-                    product: item.name,
+                const newItem: ListType = {idProduct: item.idProduct,
+                    product: item.product,
                     unit: item.unit,
                     qtd: value,
                     image: item.image}
@@ -118,28 +118,108 @@ const CheckOrder = () => {
 
     const handleSendOrder = async () => {
 
-        
-        if(suplier ==='') {
-            setError({param: 'Suplier', msg: 'Plese Select the Suplier'})
+        setError({} as ErrorType)
+        setBlocked(true)
+
+        if(!user) {
+            setError({param: 'User', msg: 'Please add your Name'})
+            setBlocked(false)
             return
         } 
-
+      
         if(list.length === 0) {
             setError({param: 'Order', msg: 'The List is Empty - Select at Least one item'})
+            setBlocked(false)
             return
         } 
-/*
-        const json = await api.addOrder(userAdmin, suplier, list, description)
 
-        if(json.error) {
-            setError(json.error)
+        const divergences: number[]= []
+
+        if(list.length === orderList.length) {
+            orderList.forEach((item, index) => {
+                if(item.qtd === list[index].qtd){
+                    return
+                } else {
+                    divergences.push(index)
+                }
+            })
         } else {
-            setSuccess({param: 'Order', msg: 'Order Created Successfully'})
-            setTimeout(() => {
-                setSuccess({param: '', msg: ''})
-            }, 5000)
-        }*/
+            
+            orderList.forEach((item, index) => {
+
+                const check = list.filter((it, ind) => it.idProduct === item.idProduct && it.qtd === item.qtd)                
+                if(check.length ===0) {
+                    divergences.push(index)
+                }
+
+            })               
+
+        }
+        console.log(divergences)
+
+        if(divergences.length === 0) {
+
+            const json = await api.orderCheck(list, user, id, "CLOSE", description)
+
+            if(json.error) {
+                setError(json.error)
+                setBlocked(false)
+            } else {
+                setSuccess({param: 'Order', msg: 'Order Created Successfully'})
+                setTimeout(() => {
+                    setBlocked(false)
+                    setSuccess({param: '', msg: ''})
+                    window.location.href = '/'
+                }, 3000)
+            } 
+        } else {
+
+            setConfirmClass(true)
+
+            
+            
+            /*
+
+            const json = await api.orderCheck(list, user, id, "DIVERGENT", description)
+
+            if(json.error) {
+                setError(json.error)
+                setBlocked(false)
+            } else {
+                setSuccess({param: 'Order', msg: 'Order Created Successfully'})
+                setTimeout(() => {
+                    setSuccess({param: '', msg: ''})
+                    setBlocked(false)
+                    window.location.href = '/'
+                }, 2500)
+            } 
+
+        */}
+        
     }
+
+    const handleEditAgain = () => {
+        setBlocked(false)
+        setConfirmClass(false)
+    }
+
+    const handleConfirm = async () => {
+
+        const json = await api.orderCheck(list, user, id, "DIVERGENT", description)
+
+            if(json.error) {
+                setError(json.error)
+                setBlocked(false)
+            } else {
+                setSuccess({param: 'Order', msg: 'Order Created Successfully'})
+                setTimeout(() => {
+                    setSuccess({param: '', msg: ''})
+                    setBlocked(false)
+                    window.location.href = '/'
+                }, 2500)
+            } 
+    }
+
 
 
     return (
@@ -163,20 +243,20 @@ const CheckOrder = () => {
                 <label className={styles.area}>
                     <div>User</div>
                     <div>
-                        <input type="text" placeholder='Type your name...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
+                        <input type="text" disabled={blocked} placeholder='Type your name...'  value={user} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUser(event.target.value)}/>
                     </div>
                 </label>
                 <label className={styles.area}>
                     <div>Note: </div>
                     <div>
-                        <input type="text" placeholder='Type a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
+                        <input type="text" disabled={blocked} placeholder='Type a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
                     </div>
                 </label>                
 
             </div>
 
             <div className={styles.pageContainer}>
-                <div className={styles.tableInput}>
+                <div className={confirmClass ? styles.confirmClass : styles.tableInput}>
                     <table>
                         <thead>
                             <tr>
@@ -188,20 +268,32 @@ const CheckOrder = () => {
                         <tbody>
 
                             {
-                                products.map((item, index) => 
+                                orderList.map((item, index) => 
 
-                            <tr key={item.id}>
-                                <td>{item.name}</td>
+                            <tr key={item.idProduct}>
+                                <td>{item.product}</td>
                                 <td>{item.unit}</td>
-                                <td><input type="number" min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
+                                <td><input disabled={blocked} type="number" min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
                             </tr>                            
 
                             )}
                         </tbody>                
                     </table>     
                 </div>
-                <div className={styles.tablePreview}>
-                    <table>
+
+                <div className={!confirmClass? styles.confirmClass : styles.previewContainer}>                    
+                    
+                    <div className={styles.divergence}>
+                        <p>The List below is different from the Original Order....</p>
+
+                    </div>
+                    <div className={styles.buttons}>
+                        <button onClick={handleEditAgain}>Edit Again</button>
+                        <button onClick={handleConfirm}>Confirm </button>
+
+                    </div>                    
+
+                    <table className={styles.tablePreview}>
                         <thead>
                             <tr>
                                 <th>Product</th>
@@ -221,18 +313,16 @@ const CheckOrder = () => {
                             </tr>                            
 
                             )}
+                            
                         </tbody>                
                     </table> 
-                    <p>{description}</p>    
-
+                    
                 </div>
-
-
 
             </div>
             <div className={styles.buttonsArea}>
                 
-                <button className={styles.buttonSend} onClick={handleSendOrder}>Send List</button>
+                <button  disabled={blocked} className={confirmClass ? styles.confirmClass : styles.buttonSend} onClick={handleSendOrder}>Send List</button>
             </div>            
         </div>
 

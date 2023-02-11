@@ -86,7 +86,8 @@ function Home() {
                                         
                                     <h4>Suplier: {item.suplier}</h4>
                                     <p>Order Date: {item.orderDate.substr(0,10)}</p> 
-                                    <p>Total itens: {item.listOrder.length}</p>                   
+                                    <p>Total itens: {item.listOrder.length}</p>   
+                                    <p>NOTE: {item.admDesc}</p>                
 
                                         
                               </Link>

@@ -4,13 +4,46 @@
     justify-content: space-around;
 }
 
+.previewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .divergence {
+        display: flex;    
+        align-items: center;    
+    }
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;  
+
+        button {
+            background-color: #0089FF;
+            border: 0;
+            outline: 0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #FFF;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 10px;
+                        
+            &:hover {
+            background-color: #006FCE;
+        }             
+
+        }
+    }
+}
+
 .topInputs {
     padding: 15px;
     margin-left: 30px;
     display: flex;
+    justify-content: space-around;
     input {
-        width: 250px;
-        margin-right: 20px;
+        width: 210px;
+        
     }
 }
 
@@ -79,4 +112,8 @@
     border: 2px solid #00ff22;
     padding: 10px;
     
+}
+
+.confirmClass {
+    display: none
 }

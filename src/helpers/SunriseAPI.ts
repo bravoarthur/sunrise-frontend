@@ -26,10 +26,15 @@ type BodyType = {
     idSuplier?: string,
     listOrder?: ListType[],
     desc?: string,
+    checkOrder?: ListType[],
+    idOrder?: string,
+    checkerdesc?: string,
+    userChecker?: string,
+    status?: string
 
 }
 
-const BASE_API = 'http://localhost:4000'
+const BASE_API = 'http://192.168.0.3:4000'
 
 const apiFetchPost = async (endPoint: string, body: BodyType) => {
 
@@ -86,7 +91,6 @@ const apiFetchGet = async (endPoint: string, body: BodyType = {}) => {
 }
 
 
-
 const BravoStoreAPI = {
 
     login: async (email: string, password: string) => {
@@ -125,7 +129,7 @@ const BravoStoreAPI = {
 
         const json = await apiFetchGet(`/order/item/${id}`, options) 
         
-        return json.orderList
+        return json.order
 
     },
 
@@ -172,6 +176,14 @@ const BravoStoreAPI = {
     addOrder: async (idAdm: string, idSuplier: string, listOrder: ListType[], desc: string) => {
 
         const json = await apiFetchPost('/order/add', {idAdm: idAdm, idSuplier: idSuplier, listOrder: listOrder, desc: desc}) 
+
+        return json
+
+    },
+    
+    orderCheck: async (checkOrder: ListType[],  userChecker: string, idOrder: string| undefined, status: string, checkerdesc?: string) => {
+
+        const json = await apiFetchPost('/order/check', {checkOrder: checkOrder, checkerdesc: checkerdesc, userChecker: userChecker, idOrder: idOrder, status: status}) 
 
         return json
 
