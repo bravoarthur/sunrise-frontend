@@ -78,14 +78,13 @@ function SignIn() {
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Remember Password</div>
                         <div className={styles.areainput}>
-                            <input className='chkbox'type="checkbox" disabled={disabled} checked={rememberPass} onChange={() => setRememberPass(!rememberPass)}/>
+                            <input className={styles.chkbox} type="checkbox" disabled={disabled} checked={rememberPass} onChange={() => setRememberPass(!rememberPass)}/>
                         </div>
                     </label>
-                    <div className={styles.area}>
-                        <div className={styles.areatitle}></div>
-                        <div className={styles.areainput}>
-                            <button disabled={disabled}>Log In</button>
-                        </div>
+                    <div className={styles.areaButton}>
+                        
+                        <button disabled={disabled}>Log In</button>
+                       
                     </div>
                 </form>
             </div>

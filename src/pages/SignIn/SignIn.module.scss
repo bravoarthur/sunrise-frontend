@@ -1,11 +1,13 @@
 .pageContainer {
-    max-width: 1000px;
+    max-width: 600px;
     margin: auto;
+    padding-left: 30px;    
+    padding: 0 30px;
 }
 
 .pageTitle {
 
-    font-size: 27px
+    font-size: 22px
 }
 
 .errorArea {
@@ -23,7 +25,7 @@
         background-color: #FFF;
         border-radius: 3px;
         padding: 10px;
-        box-shadow: 0px 0px 3px #999;
+        box-shadow: 0px 0px 5px #999;
         
         .area {
             display: flex;
@@ -34,7 +36,7 @@
             
             
             .areatitle{
-                width: 200px;
+                width: 140px;
                 text-align: right;
                 padding-right: 20px;
                 font-weight: bold;  
@@ -42,8 +44,7 @@
             }
             
             .areainput {
-                flex: 1;
-                
+                flex: 1;                
                 
                 input {
                     
@@ -62,26 +63,34 @@
                 }
     
                 .chkbox {
-                    width: 5%;                 
-                }
-                
-                button {
-                    background-color: #0089FF;
-                    border: 0;
-                    outline: 0;
-                    padding: 5px 10px;
-                    border-radius: 4px;
-                    color: #FFF;
-                    font-size: 15px;
-                    cursor: pointer;
-                                
-                    &:hover {
-                       background-color: #006FCE;
-                   }               
-                    
-                }
+                    width: 10%;                 
+                }    
                 
             }
+        }
+
+        .areaButton {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+
+            button {
+                background-color: #0089FF;
+                border: 0;
+                outline: 0;
+                margin-top: 30px;
+                padding: 5px 10px;
+                border-radius: 4px;
+                color: #FFF;
+                font-size: 15px;
+                cursor: pointer;
+                            
+                &:hover {
+                   background-color: #006FCE;
+               }               
+                
+            }
+
         }
     }
 

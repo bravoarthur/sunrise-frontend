@@ -28,7 +28,7 @@ type BodyType = {
     desc?: string,
     checkOrder?: ListType[],
     idOrder?: string,
-    checkerdesc?: string,
+    checkerDesc?: string,
     userChecker?: string,
     status?: string,
     divergent?: number[],
@@ -232,9 +232,9 @@ const BravoStoreAPI = {
 
     },
     
-    orderCheck: async (checkOrder: ListType[],  userChecker: string, idOrder: string| undefined, status: string, checkerdesc?: string, divergent?: number[]) => {
+    orderCheck: async (checkOrder: ListType[],  userChecker: string, idOrder: string| undefined, status: string, checkerDesc?: string, divergent?: number[]) => {
 
-        const json = await apiFetchPost('/order/check', {checkOrder: checkOrder, checkerdesc: checkerdesc, userChecker: userChecker, idOrder: idOrder, status: status, divergent: divergent}) 
+        const json = await apiFetchPost('/order/check', {checkOrder: checkOrder, checkerDesc: checkerDesc, userChecker: userChecker, idOrder: idOrder, status: status, divergent: divergent}) 
 
         return json
 

@@ -18,23 +18,23 @@ function App() {
 
   return (
 
-    <>
-		<Header/>
-			<Routes>
+    <div className='container'>
+        <Header/>
+          <Routes>
 
-				<Route path='/' element={<Home/>} />                    
-                <Route path='/signin' element={<SignIn/>} />
-                <Route path='/signup' element={<SignUp/>}/> 
-				        <Route path='/checkitem/:id' element={<CheckOrder/>}/> 
-                <Route path='/review/:id' element={<ReviewList/>}/> 
-                <Route path='/addproducts' element={<AddProducts/>}/> 
-                <Route path='/addcategory' element={<AddCategory/>}/> 
-                <Route path='/addsuplier' element={<AddSuplier/>}/> 
-                <Route path='/neworder' element={<NewOrder/>}/>
-			</Routes>
-		<Footer/>
+            <Route path='/' element={<Home/>} />                    
+                    <Route path='/signin' element={<SignIn/>} />
+                    <Route path='/signup' element={<SignUp/>}/> 
+                    <Route path='/checkitem/:id' element={<CheckOrder/>}/> 
+                    <Route path='/review/:id' element={<ReviewList/>}/> 
+                    <Route path='/addproducts' element={<AddProducts/>}/> 
+                    <Route path='/addcategory' element={<AddCategory/>}/> 
+                    <Route path='/addsuplier' element={<AddSuplier/>}/> 
+                    <Route path='/neworder' element={<NewOrder/>}/>
+          </Routes>
+        <Footer/>
       
-    </>
+    </div>
 
   );
 }

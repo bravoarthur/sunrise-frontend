@@ -1,18 +1,134 @@
 .pageContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    background-color: #EEE;
+    margin: auto;
+
+    .descSuplier {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 15px;
+
+        .inputDesc {
+            margin-right: 10px; 
+            input {
+                width: 70%
+            }                          
+        }
+
+        .inputSuplier {
+            margin-left: 10px;    
+    
+        }
+    }    
 }
 
-.topInputs {
-    padding: 15px;
-    margin-left: 30px;
+.tableContainer {
+
     display: flex;
-    input {
-        width: 250px;
-        margin-right: 20px;
+    width: 80%;
+    flex-direction: column;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px #999;
+
+    .FiltersBox{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;       
+        margin: 12px 0;
+        height: 30px;
+        font-size: 12px;
+
+        .filterCategory{
+            margin-left: 10px;
+            margin-right: 10px; 
+            select {
+                width: 90%;
+                font-size: 10px;
+            }   
+        }
+        .filterText {
+            margin-left: 10px;
+            input {
+                width: 80%;
+                font-size: 10px
+            }
+        }
     }
+
+    .tableBox {
+        display: flex;
+        display: row;
+        .tableInput {
+            font-size: 12px;
+            width: 250px;
+            
+            input {
+                width: 90%;
+                font-size: 12px;
+            }
+
+            .thProduct {
+                width: 70px;
+            }
+
+            .thUnit {
+                font-size: 9px;
+
+            }
+
+            .thQtd {
+                font-size: 10px;
+
+            }            
+
+            td:first-child {
+                background: green;
+                width: 60%;
+            }
+            td:nth-child(2) {
+                background: blue;
+                width: 15%;                
+                white-space: nowrap;
+            }
+            td:last-child {
+                background: red;
+                width: 25%;
+            }
+
+
+
+        }
+
+    }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .tableInput {
     width: 60%;

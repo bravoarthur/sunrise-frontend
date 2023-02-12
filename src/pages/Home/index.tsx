@@ -15,8 +15,8 @@ type OrderType = {
     id: string,
     suplier: string,
     orderDate: string,
-    checkDate?: Date,
-    userChecker?: string,
+    checkDate?: string,
+    userchecker?: string,
     listOrder: ListType[],
     listCheck: ListType[],
     admDesc?: string,
@@ -53,31 +53,28 @@ function Home() {
 
     return (
 
-        <>
+        <div className={styles.pageContainer}>
             {
                 logged &&  
 
-                <div className={styles.pageContainer}>
+                <div className={styles.butContainer}>                    
                     
-                    <div className={styles.buttonContainer}>
-                        <Link className={styles.buttons} to={`/addcategory`}>        
-                            Add Category
-                        </Link>     
-                        <Link className={styles.buttons} to={`/addsuplier`}>        
-                            Add suplier
-                        </Link>
-                        <Link className={styles.buttons} to={`/addproducts`}>        
-                            Add product
-                        </Link>          
-
-                    </div>
+                    <Link className={styles.buttons} to={`/addcategory`}>        
+                        Add Category
+                    </Link>     
+                    <Link className={styles.buttons} to={`/addsuplier`}>        
+                        Add suplier
+                    </Link>
+                    <Link className={styles.buttons} to={`/addproducts`}>        
+                        Add product
+                    </Link>                              
 
                 </div>         
             }
 
-            <div className={styles.pageContainer}>
-                <h3>{logged? 'Orders to Review' : 'Open Orders'}</h3>
-                <div className={styles.orderContainer}>
+            <h1 className={styles.pageTitle}>{logged? 'Orders to Review' : 'Open Orders'}</h1>
+            <div className={styles.ordersContainer}>
+                <div className={styles.orderCard}>
 
                     {orderList.map((item,index) => {
 
@@ -85,9 +82,20 @@ function Home() {
                        
                                         
                                     <h4>Suplier: {item.suplier}</h4>
-                                    <p>Order Date: {item.orderDate.substr(0,10)}</p> 
+                                    <p>Order Date: {item.orderDate.substr(0,10)}</p>
+                                    {logged && 
+                                        <div>
+                                            <div>
+                                                <p>Date Received: {item.checkDate? item.checkDate.substring(0,10) : ''}</p>        
+                                            </div>
+                                            <div>
+                                                <p>Checked by: {item.userchecker? item.userchecker : ''}</p>        
+                                            </div>
+                                        </div>
+                                    
+                                    } 
                                     <p>Total itens: {item.listOrder.length}</p>   
-                                    <p>NOTE: {item.admDesc}</p>                
+                                    <p>NOTE: {logged? item.checkerDesc : item.admDesc}</p>                
 
                                         
                               </Link>
@@ -100,7 +108,7 @@ function Home() {
             </div>          
            
         
-        </>
+        </div>
 
 
     );

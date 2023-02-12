@@ -49,7 +49,7 @@ function AddSuplier() {
 
         <div className={styles.pageContainer}>
 
-            <div className={styles.pageTitle}> <h1>Add New Suplier</h1></div>
+            <h1 className={styles.pageTitle}>Add New Suplier</h1>           
 
             <div className={styles.pageArea} >
                 {error.param && 
@@ -72,11 +72,10 @@ function AddSuplier() {
                         </div>
                     </label>                    
                     
-                    <div className={styles.area}>
-                        <div className={styles.areatitle}></div>
-                        <div className={styles.areainput}>
-                            <button disabled={disabled}>ADD ITEM</button>
-                        </div>
+                    <div className={styles.areaButton}>
+                       
+                        <button disabled={disabled}>ADD SUPPLIER</button>
+                       
                     </div>
                 </form>
             </div >

@@ -69,8 +69,8 @@ function SignUp() {
     return (  
 
         <div className={styles.pageContainer}>
-
-            <div className={styles.pageTitle}> <h1>Sign Up</h1></div>
+            <h1 className={styles.pageTitle}>Sign Up</h1>
+            
 
             <div className={styles.pageArea} >
                 {error.param && 
@@ -112,11 +112,10 @@ function SignUp() {
                             <input type="password" required disabled={disabled} value={confirmPass} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setConfirmPass(event.target.value)}/>
                         </div>
                     </label>
-                    <div className={styles.area}>
-                        <div className={styles.areatitle}></div>
-                        <div className={styles.areainput}>
-                            <button disabled={disabled}>Sign Up</button>
-                        </div>
+                    <div className={styles.areaButton}>
+                        
+                        <button disabled={disabled}>Sign Up</button>
+                        
                     </div>
                 </form>
             </div >

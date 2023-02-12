@@ -97,7 +97,7 @@ function AddProducts() {
 
         <div className={styles.pageContainer}>
 
-            <div className={styles.pageTitle}> <h1>Add New Product</h1></div>
+            <h1 className={styles.pageTitle}>Add New Product</h1>
 
             <div className={styles.pageArea} >
                 {error.param && 
@@ -148,11 +148,10 @@ function AddProducts() {
                         </div>
                     </label>
                     
-                    <div className={styles.area}>
-                        <div className={styles.areatitle}></div>
-                        <div className={styles.areainput}>
-                            <button disabled={disabled}>ADD ITEM</button>
-                        </div>
+                    <div className={styles.areaButton}>                        
+                        
+                        <button disabled={disabled}>ADD ITEM</button>
+                        
                     </div>
                 </form>
             </div >

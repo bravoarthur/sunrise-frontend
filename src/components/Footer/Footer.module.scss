@@ -1,8 +1,16 @@
 
 .footer {
 
-    height: 100px;
-    background-color: #CCC
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70px;
+    padding-left: 15px;
+    background-color: #CCC;
+    font-size: 13px;
+    position: fixed; 
+    bottom: 0; 
+    width: 100%    
 
 }
 

@@ -184,7 +184,7 @@ const NewOrder = () => {
 
 
     return (
-        <div>
+        <div className={styles.pageContainer}>
 
             {
                 error.param && 
@@ -200,30 +200,15 @@ const NewOrder = () => {
                 </div>
             }
 
-            <div className={styles.topInputs}>
+            <div className={styles.descSuplier}>
 
-                <label className=''>
-                        <div className=''>Category</div>
-                        <div className=''>
-                            <select required disabled={blocked} value={catFilter} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setCatFilter(event.target.value)}>
-                                <option value=''>All Items</option>
-                                {categories.map((item, index) => <option value={item._id} key={index}>{item.name}</option>)}
-                            </select>
-                        </div>
-                    </label>
-                <label className={styles.area}>
+                <label className={styles.inputDesc}>
                     <div>Note: </div>
                     <div>
                         <input type="text" disabled={blocked} placeholder='Insert a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
                     </div>
                 </label>
-                <label className={styles.area}>
-                    <div>Note Teste: </div>
-                    <div>
-                        <input type="text" disabled={blocked} placeholder='Insert a note...'  value={textFilter} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTextFilter(event.target.value)}/>
-                    </div>
-                </label>
-                <label className={styles.area}>
+                <label className={styles.inputSuplier}>
                     <div>Select the Suplier: </div>
                     <div>
                         <select value={suplier} disabled={blocked} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setSuplier(event.target.value)}>
@@ -236,14 +221,34 @@ const NewOrder = () => {
 
             </div>
 
-            <div className={styles.pageContainer}>
-                <div className={styles.tableInput}>
-                    <table>
+            <div className={styles.tableContainer}>
+
+                <div className={styles.FiltersBox}>
+
+                    <p>Filters</p>
+                               
+                    <div className={styles.filterCategory}>
+                        <select required disabled={blocked} value={catFilter} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setCatFilter(event.target.value)}>
+                            <option value=''>Category/All</option>
+                            {categories.map((item, index) => <option value={item._id} key={index}>{item.name}</option>)}
+                        </select>
+                    </div>                        
+                               
+                    <div className={styles.filterText}>
+                        <input type="text" disabled={blocked} placeholder='Type a product...'  value={textFilter} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTextFilter(event.target.value)}/>
+                    </div>
+                   
+
+                </div>
+
+                <div className={styles.tableBox}>
+                    
+                    <table className={styles.tableInput}>
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Unit</th>
-                                <th>Qtd</th>
+                                <th className={styles.thProduct}>Product</th>
+                                <th className={styles.thUnit}>Unit</th>
+                                <th className={styles.thQtd} >Qtd</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -259,10 +264,9 @@ const NewOrder = () => {
 
                             )}
                         </tbody>                
-                    </table>     
-                </div>
-                <div className={styles.tablePreview}>
-                    <table>
+                    </table>   
+
+                    <table className={styles.tablePreview}>
                         <thead>
                             <tr>
                                 <th>Product</th>
@@ -284,19 +288,18 @@ const NewOrder = () => {
                             )}
                         </tbody>                
                     </table> 
-                    <p>{description}</p>    
+                    <p>{description}</p>  
 
                 </div>
 
-
-
             </div>
+
+           
             <div className={styles.buttonsArea}>
                 
                 <button className={styles.buttonSend} disabled={blocked} onClick={handleSendOrder}>Send List</button>
             </div>            
         </div>
-
 
     )
 

@@ -38,14 +38,14 @@ type OrderItemType = {
     admDesc: string,
     checkerDesc: string,
 }
-
+/*
 type ProductsType = {
     id: string,
     category: string,
     name: string,
     unit: string,
     image: string
-}
+}*/
            
 
 const ReviewList = () => {

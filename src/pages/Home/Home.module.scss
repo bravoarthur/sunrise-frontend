@@ -1,63 +1,106 @@
-
 .pageContainer {
-    display: flex;
-    background-color: #DDD;
-    flex-direction: column;
-    margin: 20px;
-    border-radius: 5px;
-    padding: 10px;
-   
-   
-}
-
-.orderContainer {
-    display: flex;
-    width: 100%;
-    min-height: 200px;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
-}
-
-.item{
-    background-color: #999;
-    border-radius: 10px;
-    padding: 10px;
-    width: 31%;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    text-decoration: none;
-    color: black;
-    transition: all ease 0.4s;
-    &:hover{
-        border: 1px solid #666;
-        background-color: #777;
+    max-width: 850px;
+    margin: auto;        
+    padding: 0 25px;
+    .pageTitle {
+        font-size: 22px;
     }
 }
 
-
-.buttonContainer {
-    display: flex;
+.butContainer {
+    display: flex; 
+    padding: 10px;    
+    margin: 10px 0px;   
     width: 100%;    
     flex-wrap: wrap;
     justify-content: center;
 
-}
-
-.buttons{
+    .buttons{
     
-    background-color: #FF8100;
-    border-radius: 4px;
-    color: #FFF;
-    padding: 5px 10px;
-    text-decoration: none;
-    margin-right: 10px;
-    font-size: 13px;
-
-    &:hover {
-        background-color: #E57706;
+        background-color: #FF8100;
+        border-radius: 4px;
+        color: #FFF;
+        padding: 5px 10px;
+        text-decoration: none;
+        margin-right: 10px;
+        font-size: 13px;
+        transition: all ease 0.4s;
+    
+        &:hover {
+            background-color: #E57706;
+        }        
+        
     }
     
+    @media (max-width: 400px) {  
+       .buttons {
+        font-size: 8px;
+        padding: 3px 7px;
+       }   
+    }
+}
+
+
+.ordersContainer {
+    display: flex;  
+    background-color: #FFF;
+    flex-direction: column;    
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 0px 5px #999;
+      
+    .orderCard {
+        display: flex;
+        width: 100%;
+        min-height: 100px;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    
+        .item{
+            background-color: #DDDD;
+            border-radius: 10px;
+            font-size: 10px;
+            padding: 10px;
+            width: 45%;    
+            margin: 5px 0;
+            text-decoration: none;
+            color: black;
+            transition: all ease 0.4s;
+            &:hover{
+                border: 1px solid #AAA;
+                background-color: #AAAA;
+            }
+            p {
+                margin: auto;
+            }
+            h4 {
+                margin-top: auto;
+            }
+
+            @media (max-width: 400px) {  
+                width: 90%;   
+            }
+
+            @media (min-width: 400px) {  
+                width: 45%;   
+            }
+
+            @media (min-width: 600px) {   
+                width: 30%;   
+            }
+
+            @media (min-width: 1000px) {              
+                width: 30%;
+            }
+            @media (min-width: 1600px) {   
+                width: 30%;
+            }
+            
+        }
+    
+    }
     
 }
+
+
   

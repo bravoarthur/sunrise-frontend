@@ -4,6 +4,7 @@
 background-color: #FFF;
 height: 60px;
 border-bottom: 1px solid #CCC;
+padding-left: 10px;
     
 .container {
     max-width: 1000px;
@@ -19,6 +20,13 @@ border-bottom: 1px solid #CCC;
 
     &:hover {
         background-color: #E57706;
+    }
+
+    @media (max-width: 400px) {  
+        
+        font-size: 7px;
+        padding: 3px 7px;
+         
     }
 
 }
@@ -62,8 +70,8 @@ nav {
     }
 
     li{
-        margin-left: 20px;
-        margin-right: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
 
         a, button {
             border: 0;
