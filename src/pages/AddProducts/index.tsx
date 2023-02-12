@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect} from 'react'
 import styles from "./AddProducts.module.scss"
 import useApi from '../../helpers/SunriseAPI'
 
