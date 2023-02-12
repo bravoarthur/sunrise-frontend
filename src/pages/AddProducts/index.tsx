@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import styles from "./AddProducts.module.scss"
 import useApi from '../../helpers/SunriseAPI'
 
@@ -25,11 +25,12 @@ type CategoriesType = {
 
 function AddProducts() {
 
-    const api = useApi   
+    const api = useApi       
 
     const [name, setName] = useState('')
     const [unit, setUnit] = useState('')   
-    const [productCategorie, setProductCategorie] = useState('') 
+    const [productCategorie, setProductCategorie] = useState('')
+    const [img, setImg] = useState<File | undefined>(undefined) 
     const [disabled, setDisabled] = useState(false)
     const [error, setError] = useState({} as ErrorType)
     const [success, setSuccess] = useState('')
@@ -46,16 +47,38 @@ function AddProducts() {
         getCats()
     }, [api])    
 
+    
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
         event.preventDefault()
         setDisabled(true) 
-        setError({} as ErrorType)       
+        setError({} as ErrorType)  
+        
+        const dataForm = new FormData()
 
-        const json = await api.addProduct(name, unit, productCategorie)
+        if(img) {
+            dataForm.append('img', img)
+            dataForm.append('unit', unit)
+            dataForm.append('newProduct', name)
+            dataForm.append('category', productCategorie)
+
+            console.log(img)
+            console.log(dataForm)
+           
+        } else {
+            dataForm.append('unit', unit)
+            dataForm.append('newProduct', name)
+            dataForm.append('category', productCategorie)
+
+            console.log('SEM IMAGEM')
+            console.log(dataForm)
+        }
+
+        const json = await api.addProduct(dataForm)
 
         if(json.error) {
-            setError(json.error[0])            
+            setError(json.error[0])           
             setDisabled(false)
             return
         } else {            
@@ -70,9 +93,6 @@ function AddProducts() {
         }
     }
 
-
-
-
     return (  
 
         <div className={styles.pageContainer}>
@@ -82,7 +102,7 @@ function AddProducts() {
             <div className={styles.pageArea} >
                 {error.param && 
                 <div className={styles.errorMessage}>
-                    {`${error.param} error - ${error.msg}`}
+                     {`${error.param} error - ${error.msg}`}
                 </div>
                 }
 
@@ -124,7 +144,7 @@ function AddProducts() {
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Image</div>
                         <div className={styles.areainput}>
-                            <input type="file" disabled={disabled} value={''} onChange={(event: React.ChangeEvent<HTMLInputElement>) => ''}/>
+                            <input type="file" disabled={disabled} accept='image/jpeg' onChange={(event: React.ChangeEvent<HTMLInputElement>) => setImg(event?.currentTarget?.files?.[0])} />
                         </div>
                     </label>
                     

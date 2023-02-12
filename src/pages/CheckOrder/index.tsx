@@ -51,6 +51,7 @@ const CheckOrder = () => {
     const [list, setList] = useState([] as ListType[])
     const [user, setUser] = useState('')
     const [description, setDescription] = useState('')
+    const [divergent, setDivergent] = useState([] as number[])
     const [confirmClass, setConfirmClass] = useState(false)
     const [blocked, setBlocked] = useState(false)    
     const [error, setError] = useState({} as ErrorType)
@@ -63,7 +64,7 @@ const CheckOrder = () => {
     useEffect(() => {
         const getOrder = async () => {
             if(!id) {                
-                setError({param: 'List Error', msg: 'It Wastn Possible to Load the List, back Home e Try Again'})
+                setError({param: 'List Error', msg: 'It Wasnt Possible to Load the List, back Home and Try Again'})
                 return
             }
            
@@ -174,27 +175,10 @@ const CheckOrder = () => {
             } 
         } else {
 
-            setConfirmClass(true)
-
+            setConfirmClass(true)  
+            setDivergent(divergences)         
             
-            
-            /*
-
-            const json = await api.orderCheck(list, user, id, "DIVERGENT", description)
-
-            if(json.error) {
-                setError(json.error)
-                setBlocked(false)
-            } else {
-                setSuccess({param: 'Order', msg: 'Order Created Successfully'})
-                setTimeout(() => {
-                    setSuccess({param: '', msg: ''})
-                    setBlocked(false)
-                    window.location.href = '/'
-                }, 2500)
-            } 
-
-        */}
+        }
         
     }
 
@@ -205,7 +189,7 @@ const CheckOrder = () => {
 
     const handleConfirm = async () => {
 
-        const json = await api.orderCheck(list, user, id, "DIVERGENT", description)
+        const json = await api.orderCheck(list, user, id, "DIVERGENT", description, divergent)
 
             if(json.error) {
                 setError(json.error)
@@ -325,7 +309,6 @@ const CheckOrder = () => {
                 <button  disabled={blocked} className={confirmClass ? styles.confirmClass : styles.buttonSend} onClick={handleSendOrder}>Send List</button>
             </div>            
         </div>
-
 
     )
 

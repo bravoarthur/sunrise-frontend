@@ -11,6 +11,7 @@ import AddProducts from './pages/AddProducts';
 import AddCategory from './pages/AddCategory';
 import AddSuplier from './pages/AddSuplier';
 import NewOrder from './pages/NewOrder';
+import ReviewList from './pages/ReviewList';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                 <Route path='/signin' element={<SignIn/>} />
                 <Route path='/signup' element={<SignUp/>}/> 
 				        <Route path='/checkitem/:id' element={<CheckOrder/>}/> 
+                <Route path='/review/:id' element={<ReviewList/>}/> 
                 <Route path='/addproducts' element={<AddProducts/>}/> 
                 <Route path='/addcategory' element={<AddCategory/>}/> 
                 <Route path='/addsuplier' element={<AddSuplier/>}/> 

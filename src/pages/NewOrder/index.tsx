@@ -9,6 +9,7 @@ type ListType = {
     qtd: number,
     unit: string,
     image: string
+    divergent: boolean
 }
 
 type ErrorType = {
@@ -44,6 +45,12 @@ type ProductsType = {
     unit: string,
     image: string
 }
+
+type CategoriesType = {
+    _id: string,
+    name: string,
+    slug: string
+}
   
 
 
@@ -56,6 +63,9 @@ const NewOrder = () => {
     const [list, setList] = useState([] as ListType[])
     const [description, setDescription] = useState('')
     const [suplier, setSuplier] = useState('')
+    const [categories, setCategories] = useState([] as CategoriesType[])
+    const [textFilter, setTextFilter] = useState('')
+    const [catFilter, setCatFilter] = useState('')
     const [blocked, setBlocked] = useState(false)
     const [error, setError] = useState({} as ErrorType)
     const [success, setSuccess] = useState({
@@ -66,11 +76,11 @@ const NewOrder = () => {
         
     useEffect(() => {
         const getProducts = async () => {
-            const pList = await  api.getProductsList({})            
+            const pList = await  api.getProductsList({q: textFilter, cat: catFilter})            
             setProducts(pList)
         }
         getProducts()
-    }, [api])
+    }, [api, textFilter, catFilter])
 
     useEffect(() => {
         const getSupliersList = async () => {
@@ -79,6 +89,15 @@ const NewOrder = () => {
         }
         getSupliersList()
     }, [api])
+
+    useEffect(() => {
+        const getCategories = async () => {
+            const catList = await  api.getCategories()            
+            setCategories(catList)
+        }
+        getCategories()
+    }, [api])
+
 
     console.log(list)
 
@@ -111,7 +130,9 @@ const NewOrder = () => {
                     product: item.name,
                     unit: item.unit,
                     qtd: value,
-                    image: item.image}
+                    image: item.image,
+                    divergent: false
+                }
                 const newList = list.map(item => item)
                 newList.push(newItem)
                 newList.sort((a,b) => {
@@ -150,12 +171,12 @@ const NewOrder = () => {
             setBlocked(false)
         } else {
             setSuccess({param: 'Order', msg: 'Order Created Successfully'})
-            setBlocked(false)
-            setList([])
-            setSuplier('')
-            setDescription('') 
             setTimeout(() => {
+                setList([])
+                setSuplier('')
+                setDescription('') 
                 setSuccess({param: '', msg: ''})
+                setBlocked(false)
                 window.location.reload();
             }, 2500)
         }
@@ -180,10 +201,26 @@ const NewOrder = () => {
             }
 
             <div className={styles.topInputs}>
-            <label className={styles.area}>
+
+                <label className=''>
+                        <div className=''>Category</div>
+                        <div className=''>
+                            <select required disabled={blocked} value={catFilter} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setCatFilter(event.target.value)}>
+                                <option value=''>All Items</option>
+                                {categories.map((item, index) => <option value={item._id} key={index}>{item.name}</option>)}
+                            </select>
+                        </div>
+                    </label>
+                <label className={styles.area}>
                     <div>Note: </div>
                     <div>
                         <input type="text" disabled={blocked} placeholder='Insert a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
+                    </div>
+                </label>
+                <label className={styles.area}>
+                    <div>Note Teste: </div>
+                    <div>
+                        <input type="text" disabled={blocked} placeholder='Insert a note...'  value={textFilter} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTextFilter(event.target.value)}/>
                     </div>
                 </label>
                 <label className={styles.area}>
@@ -215,7 +252,7 @@ const NewOrder = () => {
                                 products.map((item, index) => 
 
                             <tr key={item.id}>
-                                <td>{item.name}</td>
+                                <td> <img src={item.image} width={40} height={40} className={styles.image} alt=''></img> {item.name}</td>
                                 <td>{item.unit}</td>
                                 <td><input type="number" disabled={blocked} min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
                             </tr>                            

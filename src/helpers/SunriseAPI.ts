@@ -30,9 +30,13 @@ type BodyType = {
     idOrder?: string,
     checkerdesc?: string,
     userChecker?: string,
-    status?: string
-
+    status?: string,
+    divergent?: number[],
 }
+
+/*type BodyFetchFile = {
+    files: FormData
+}*/
 
 const BASE_API = 'http://192.168.0.3:4000'
 
@@ -48,7 +52,8 @@ const apiFetchPost = async (endPoint: string, body: BodyType) => {
             'Authorization': `Bearer ${token}`
         },
         //'x-access-token':
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),    
+        
     })
     
     const json = await res.json()
@@ -63,6 +68,30 @@ const apiFetchPost = async (endPoint: string, body: BodyType) => {
     
 }
 
+const apiFetchFile = async (endPoint: string, body:FormData) => {
+
+    let token = Cookies.get('token') 
+    
+    const res = await fetch(BASE_API+endPoint, {
+        method: 'POST',
+        headers: {            
+            'Authorization': `Bearer ${token}`
+        },        
+        body: body,    
+        
+    })
+    
+    const json = await res.json()
+
+    /*if(json.notallowed) {
+        go to /signin
+    }
+    */
+    console.log(json)
+
+    return json
+    
+}
 
 const apiFetchGet = async (endPoint: string, body: BodyType = {}) => {
 
@@ -88,6 +117,28 @@ const apiFetchGet = async (endPoint: string, body: BodyType = {}) => {
 
     return json
     
+}
+
+const apiFetchPut = async (endPoint: string, body: BodyType) => {
+
+    let token = Cookies.get('token') 
+    
+    const res = await fetch(BASE_API+endPoint, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        //'x-access-token':
+        body: JSON.stringify(body)
+    })
+    
+    const json = await res.json()
+
+    console.log(json)
+
+    return json    
 }
 
 
@@ -149,9 +200,9 @@ const BravoStoreAPI = {
 
     },
 
-    addProduct: async (name: string, unit: string, category: string, image?: string) => {
-
-        const json = await apiFetchPost('/products/add', {newProduct: name, unit: unit, category: category}) 
+    addProduct: async (files: FormData) => {
+        
+        const json = await apiFetchFile('/products/add', files) 
 
         return json
 
@@ -181,19 +232,21 @@ const BravoStoreAPI = {
 
     },
     
-    orderCheck: async (checkOrder: ListType[],  userChecker: string, idOrder: string| undefined, status: string, checkerdesc?: string) => {
+    orderCheck: async (checkOrder: ListType[],  userChecker: string, idOrder: string| undefined, status: string, checkerdesc?: string, divergent?: number[]) => {
 
-        const json = await apiFetchPost('/order/check', {checkOrder: checkOrder, checkerdesc: checkerdesc, userChecker: userChecker, idOrder: idOrder, status: status}) 
+        const json = await apiFetchPost('/order/check', {checkOrder: checkOrder, checkerdesc: checkerdesc, userChecker: userChecker, idOrder: idOrder, status: status, divergent: divergent}) 
 
         return json
 
     },
 
+    updateCloseOrder: async (idOrder: string|undefined) => {
 
-    
+        const json = await apiFetchPut('/order/finish', {idOrder: idOrder}) 
 
+        return json
 
-
+    },
 }
 
 export default  BravoStoreAPI

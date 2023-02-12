@@ -81,7 +81,7 @@ function Home() {
 
                     {orderList.map((item,index) => {
 
-                       return <Link key={index} className={styles.item} to={`/checkitem/${item.id}`}>
+                       return <Link key={index} className={styles.item} to={logged? `/review/${item.id}` : `/checkitem/${item.id}`}>
                        
                                         
                                     <h4>Suplier: {item.suplier}</h4>
