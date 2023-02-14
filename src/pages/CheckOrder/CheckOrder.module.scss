@@ -1,83 +1,284 @@
 .pageContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.previewContainer {
-    display: flex;
     flex-direction: column;
     align-items: center;
-    .divergence {
-        display: flex;    
-        align-items: center;    
-    }
-    .buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;  
+    width: 360px;
+    background-color: #EEE;
+    margin: 0 auto;
 
-        button {
-            background-color: #0089FF;
-            border: 0;
-            outline: 0;
-            padding: 5px 10px;
-            border-radius: 4px;
-            color: #FFF;
-            font-size: 15px;
-            cursor: pointer;
-            margin: 10px;
-                        
-            &:hover {
-            background-color: #006FCE;
-        }             
-
-        }
-    }
-}
-
-.topInputs {
-    padding: 15px;
-    margin-left: 30px;
-    display: flex;
-    justify-content: space-around;
-    input {
-        width: 210px;
+    @media (min-width: 410px) and (max-width: 600px) {
+        width: 410px;
         
     }
-}
 
-.tableInput {
-    width: 60%;
-    padding: 5px;
-    margin: 10px;
-    table {
-        width: 100%
-    }
-}
-
-.tablePreview {
-    border: 1px solid #999;
-    padding: 5px;
-    margin: 10px;
-    border-radius: 12px;
-    background-color: #DDD;
-    width: 40%;
-
-    table {
-        width: 100%
+    @media (min-width: 600px) and (max-width: 750px) {
+        width: 600px;
+        
     }
 
-    tr {
-        min-width: 40%;
+    @media (min-width: 750px) and (max-width: 1000px) {
+        width: 750px;
+        
     }
+
+    @media (min-width: 1000px) {
+        width: 1000px;
+        
+    }
+
+    .topInputs {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 15px; 
+        margin-bottom: 15px;       
+
+        .inputArea {
+            display: flex;   
+            flex-direction: column;                     
+            align-items: center;
+            font-size: 12px;
+            input {
+                width: 85%;
+                margin: 0 10px;
+                font-size: 12px;
+            }         
+        }        
+    }  
 }
 
-.buttonsArea {
+.tableContainer {
+
     display: flex;
-    min-width: 100%;
+    max-width: 95%;    
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px #999;
+    padding-bottom: 30px;
+    margin-bottom: 60px; 
     justify-content: center;
+        
+
+    .tableBox {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-around;
+        align-items: center;
+
+        .tableInput {
+            font-size: 11px;
+            width: 95%;
+            padding: 5px;
+            margin: 5px;  
+            height: 5px;             
+            
+            input {
+                width: 60%;
+                min-width: 35px;
+                font-size: 13px;
+            }
+            
+            .thProduct {
+                width: 100px;
+                text-align: left;
+                font-size: 11px;
+            }
+    
+            .thUnit {
+                text-align: center;
+                font-size: 11px;    
+            }
+    
+            .thQtd {
+                font-size: 11px;
+    
+            }
+            
+            td,tr {
+                height: 50px;
+            }
+            
+            td:first-child {                
+                width: 15%; 
+                border-bottom-left-radius: 8px;  
+                border-top-left-radius: 8px; 
+                vertical-align: center;
+                
+            }
+    
+            td:nth-child(2) {               
+                width: 45%; 
+                text-align: left;
+                font-weight: 550;
+            }
+    
+            td:nth-child(3) {                
+                width: 17%;                
+                white-space: nowrap;
+                text-align: center;
+            }
+    
+            td:last-child {                
+                width: 23%;
+                text-align: center;
+                border-bottom-right-radius: 8px;  
+                border-top-right-radius: 8px; 
+            }
+    
+            .trColor {
+            
+                background-color: #dad6d662;
+            }            
+        }        
+    }
+
+    .tableDivergence {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .tablePreview {
+            font-size: 11px;
+            border-radius: 12px;
+            background-color: #DDD;
+            box-shadow: 0px 0px 12px #999;
+            border: 1px solid #999;
+            width: 65%;
+            padding: 20px;
+            margin: 30px;  
+            height: 5px;   
+            
+            .thProduct {
+                width: 60%;
+                text-align: left;
+                font-size: 11px;
+            }
+    
+            .thUnit {
+                text-align: center;
+                font-size: 11px;    
+            }
+    
+            .thQtd {
+                font-size: 11px;
+    
+            }
+            
+            td {
+                height: 30px;
+            }
+            
+            td:first-child {                
+                width: 60%; 
+                border-bottom-left-radius: 8px;  
+                border-top-left-radius: 8px; 
+                vertical-align: center;                
+            }
+    
+            td:nth-child(2) {               
+                width: 25%; 
+                text-align: center;                
+            }   
+
+            td:last-child {                
+                width: 23%;
+                text-align: center;
+                border-bottom-right-radius: 8px;  
+                border-top-right-radius: 8px; 
+            }               
+        }
+
+        .divergence {
+            display: flex;    
+            align-items: center;  
+            width: 70%;  
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;  
+    
+            button {
+                background-color: #0089FF;
+                border: 0;
+                outline: 0;
+                padding: 5px 10px;
+                border-radius: 4px;
+                color: #FFF;
+                font-size: 13px;
+                cursor: pointer;
+                margin: 10px;
+                transition: all ease 0.3s;
+                            
+                &:hover {
+                background-color: #006FCE;
+                }             
+    
+            }
+        }
+    }
+
+    @media (min-width: 410px) and (max-width: 600px) {
+        width: 410px;
+        
+    }
+
+    @media (min-width: 600px) and (max-width: 750px) {
+        width: 600px;
+        .tableBox {
+            width: 90%;
+        }
+    }
+
+    @media (min-width: 750px) and (max-width: 1000px) {
+        min-width: 90%;
+        .tableBox {
+            width: 90%;
+        } 
+        .tablePreview {
+            min-width: 85%;
+        }
+        
+    }
+
+    @media (min-width: 1000px) {
+        min-width: 80%;
+        .tableBox {
+            min-width: 90%;
+            .tableInput {
+                font-size: 14px;
+
+                input {
+                    width: 35%;
+                    font-size: 18px;
+                } 
+                
+                th {
+                    font-size: 18px;
+                }
+            }
+        }   
+        .tablePreview {
+            min-width: 95%;
+        } 
+
+        
+            
+            
+            
+    }
+
 }
+
+
+
+.image {    
+    border-radius: 7px;
+    margin: 10px;   
+}
+
 
 .buttonSend {
     background-color: #0089FF;
@@ -88,7 +289,7 @@
     color: #FFF;
     font-size: 15px;
     cursor: pointer;
-    margin: 40px;
+    margin-bottom: 30px;
                 
     &:hover {
        background-color: #006FCE;
@@ -117,3 +318,4 @@
 .confirmClass {
     display: none
 }
+

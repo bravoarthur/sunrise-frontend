@@ -207,7 +207,7 @@ const CheckOrder = () => {
 
 
     return (
-        <div>
+        <div className={styles.pageContainer}>
 
             {
                 error.param && 
@@ -224,29 +224,29 @@ const CheckOrder = () => {
             }
 
             <div className={styles.topInputs}>
-                <label className={styles.area}>
-                    <div>User</div>
+                <label className={styles.inputArea}>
+                    <div>User:</div>
                     <div>
                         <input type="text" disabled={blocked} placeholder='Type your name...'  value={user} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setUser(event.target.value)}/>
                     </div>
                 </label>
-                <label className={styles.area}>
+                <label className={styles.inputArea}>
                     <div>Note: </div>
                     <div>
                         <input type="text" disabled={blocked} placeholder='Type a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
                     </div>
-                </label>                
-
+                </label>  
             </div>
 
-            <div className={styles.pageContainer}>
-                <div className={confirmClass ? styles.confirmClass : styles.tableInput}>
-                    <table>
+            <div className={styles.tableContainer}>
+                <div className={confirmClass ? styles.confirmClass : styles.tableBox}>
+                    <table cellSpacing={0} className={styles.tableInput}>
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Unit</th>
-                                <th>Qtd</th>
+                                <th className={styles.thProduct}></th>
+                                <th className={styles.thProduct}>Product</th>
+                                <th className={styles.thUnit}>Unit</th>
+                                <th className={styles.thQtd}>Qtd</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -254,7 +254,8 @@ const CheckOrder = () => {
                             {
                                 orderList.map((item, index) => 
 
-                            <tr key={item.idProduct}>
+                            <tr key={item.idProduct} className={(index%2 ===0)? styles.trColor : styles.trWhite}>
+                                <td><img width={50} height={50}  src={item.image} alt="" className={styles.image} /></td>
                                 <td>{item.product}</td>
                                 <td>{item.unit}</td>
                                 <td><input disabled={blocked} type="number" min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
@@ -265,7 +266,7 @@ const CheckOrder = () => {
                     </table>     
                 </div>
 
-                <div className={!confirmClass? styles.confirmClass : styles.previewContainer}>                    
+                <div className={!confirmClass? styles.confirmClass : styles.tableDivergence}>                    
                     
                     <div className={styles.divergence}>
                         <p>The List below is different from the Original Order....</p>
@@ -280,9 +281,9 @@ const CheckOrder = () => {
                     <table className={styles.tablePreview}>
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Unit</th>
-                                <th>Qtd</th>
+                                <th className={styles.thProduct}>Product</th>
+                                <th className={styles.thUnit}>Unit</th>
+                                <th className={styles.thQtd}>Qtd</th>
                             </tr>
                         </thead>
                         <tbody>

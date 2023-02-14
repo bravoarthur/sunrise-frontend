@@ -217,7 +217,10 @@ const NewOrder = () => {
 
                         </select>
                     </div>
-                </label>
+                </label>                
+                
+                <button className={styles.buttonSend} disabled={blocked} onClick={handleSendOrder}>Send List</button>
+                 
 
             </div>
 
@@ -243,9 +246,10 @@ const NewOrder = () => {
 
                 <div className={styles.tableBox}>
                     
-                    <table className={styles.tableInput}>
+                    <table className={styles.tableInput} cellSpacing={0}>
                         <thead>
                             <tr>
+                                <th className={styles.thProduct}></th>
                                 <th className={styles.thProduct}>Product</th>
                                 <th className={styles.thUnit}>Unit</th>
                                 <th className={styles.thQtd} >Qtd</th>
@@ -256,8 +260,10 @@ const NewOrder = () => {
                             {
                                 products.map((item, index) => 
 
-                            <tr key={item.id}>
-                                <td> <img src={item.image} width={40} height={40} className={styles.image} alt=''></img> {item.name}</td>
+                            <tr key={item.id} className={(index%2 ===0)? styles.trColor : styles.trWhite}>
+                                
+                                <td><img src={item.image} width={40} height={40} className={styles.image} alt=''></img></td>
+                                <td>{item.name}</td>
                                 <td>{item.unit}</td>
                                 <td><input type="number" disabled={blocked} min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
                             </tr>                            
@@ -266,12 +272,12 @@ const NewOrder = () => {
                         </tbody>                
                     </table>   
 
-                    <table className={styles.tablePreview}>
+                    <table cellSpacing={0} className={styles.tablePreview}>
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Unit</th>
-                                <th>Qtd</th>
+                                <th >Product</th>
+                                <th >Unit</th>
+                                <th >Qtd</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -288,17 +294,13 @@ const NewOrder = () => {
                             )}
                         </tbody>                
                     </table> 
-                    <p>{description}</p>  
-
+                    
                 </div>
 
             </div>
 
            
-            <div className={styles.buttonsArea}>
-                
-                <button className={styles.buttonSend} disabled={blocked} onClick={handleSendOrder}>Send List</button>
-            </div>            
+                     
         </div>
 
     )

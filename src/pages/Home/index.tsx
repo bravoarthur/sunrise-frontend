@@ -82,20 +82,20 @@ function Home() {
                        
                                         
                                     <h4>Suplier: {item.suplier}</h4>
-                                    <p>Order Date: {item.orderDate.substr(0,10)}</p>
+                                    <p><strong>Order Date:</strong> {item.orderDate.substr(0,10)}</p>
                                     {logged && 
                                         <div>
                                             <div>
-                                                <p>Date Received: {item.checkDate? item.checkDate.substring(0,10) : ''}</p>        
+                                                <p><strong>Date Received:</strong> {item.checkDate? item.checkDate.substring(0,10) : ''}</p>        
                                             </div>
                                             <div>
-                                                <p>Checked by: {item.userchecker? item.userchecker : ''}</p>        
+                                                <p><strong>Checked by:</strong> {item.userchecker? item.userchecker : ''}</p>        
                                             </div>
                                         </div>
                                     
                                     } 
-                                    <p>Total itens: {item.listOrder.length}</p>   
-                                    <p>NOTE: {logged? item.checkerDesc : item.admDesc}</p>                
+                                    <p><strong>Total itens:</strong> {item.listOrder.length}</p>   
+                                    <p><strong>NOTE: </strong>{logged? item.checkerDesc : item.admDesc}</p>                
 
                                         
                               </Link>

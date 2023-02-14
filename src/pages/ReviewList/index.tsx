@@ -98,7 +98,7 @@ const ReviewList = () => {
 
 
     return (
-        <div> 
+        <div className={styles.pageContainer}> 
 
             {
                 error.param && 
@@ -114,14 +114,13 @@ const ReviewList = () => {
                 </div>
             }           
 
-            <div className={styles.topInputs}>
-                                     
-
+            <div className={styles.title}>
+                Review Order
             </div>
 
-            <div className={styles.pageContainer}>
-                <div className={styles.tableInput}>
-                    <table>
+            <div className={styles.tableContainer}>
+                <div className={styles.tableBox}>
+                    <table cellSpacing={0} className={styles.tableInput}>
                         <thead>
                             <tr>
                                 <th>Product</th>
@@ -134,7 +133,7 @@ const ReviewList = () => {
                             {
                                 orderList.map((item, index) => 
 
-                            <tr key={item.idProduct} className={item.divergent? styles.divergent : ''}>
+                            <tr key={item.idProduct} className={(index%2 ===0)? item.divergent? styles.divergentColor : styles.equalColor : item.divergent? styles.divergentWhite : styles.equalWhite}>
                                 <td>{item.product}</td>
                                 <td>{item.unit}</td>
                                 <td>{item.qtd}</td>
@@ -142,12 +141,7 @@ const ReviewList = () => {
 
                             )}
                         </tbody>                
-                    </table>     
-                </div>
-
-                <div className={styles.previewContainer}>                    
-                    
-
+                    </table>  
                     <table className={styles.tablePreview}>
                         <thead>
                             <tr>
@@ -171,10 +165,12 @@ const ReviewList = () => {
                             
                         </tbody>                
                     </table> 
-                                               
+
                 </div>
 
             </div>
+
+            
             <div className={styles.buttonsArea}>
                 
                 <button className={styles.buttonClose} onClick={handleCloseOrder}>Close Order</button>

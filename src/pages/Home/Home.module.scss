@@ -1,7 +1,8 @@
 .pageContainer {
     max-width: 850px;
-    margin: auto;        
+    margin: 0 auto;        
     padding: 0 25px;
+      
     .pageTitle {
         font-size: 22px;
     }
@@ -61,7 +62,7 @@
             border-radius: 10px;
             font-size: 10px;
             padding: 10px;
-            width: 45%;    
+            width: 90%;    
             margin: 5px 0;
             text-decoration: none;
             color: black;
@@ -77,29 +78,26 @@
                 margin-top: auto;
             }
 
-            @media (max-width: 400px) {  
-                width: 90%;   
+            @media (min-width: 410px) and (max-width: 600px) {
+                width: 45%;
+                
             }
-
-            @media (min-width: 400px) {  
-                width: 45%;   
+        
+            @media (min-width: 600px) and (max-width: 750px) {
+                width: 45%;
+                
             }
-
-            @media (min-width: 600px) {   
-                width: 30%;   
-            }
-
-            @media (min-width: 1000px) {              
+        
+            @media (min-width: 750px) and (max-width: 1000px) {
                 width: 30%;
+                font-size: 12px;
             }
-            @media (min-width: 1600px) {   
+            @media (min-width: 1000px) {
                 width: 30%;
-            }
-            
-        }
-    
-    }
-    
+                font-size: 12px;
+            }            
+        }    
+    }    
 }
 
 

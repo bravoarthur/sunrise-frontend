@@ -9,6 +9,13 @@ body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   background-color: #EEE;   
-  
+  height: 100%; 
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
   
 }
