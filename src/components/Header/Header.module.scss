@@ -1,3 +1,4 @@
+@import "../../styles/variables";
 
 .headerArea {
 
@@ -13,13 +14,13 @@ padding-left: 10px;
 }
 
 .sellButton {
-    background-color: #FF8100;
+    background-color: $menu-button;
     border-radius: 4px;
     color: #FFF;
     padding: 5px 10px;
 
     &:hover {
-        background-color: #E57706;
+        background-color: $menu-button-hover;
     }
 
     @media (max-width: 400px) {  

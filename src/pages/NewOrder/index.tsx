@@ -2,56 +2,8 @@ import styles from './NewOrder.module.scss'
 import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
+import { CategoriesType, ErrorType, ListType, ProductsType, SuplierType } from '../../types/types'
 
-type ListType = {
-    idProduct: string,
-    product: string,
-    qtd: number,
-    unit: string,
-    image: string
-    divergent: boolean
-}
-
-type ErrorType = {
-    param: string,
-    msg: string
-}
-
-type Suplier={
-    _id: string,
-    name: string,
-    slug: string,
-}
-
-/*type OrderItemType = {
-    _id: string,
-    idSuplier: string,
-    suplierName: string,
-    idAdm: string,
-    userchecker?: string,
-    orderDate: Date,
-    checkDate?: Date,
-    status: string,
-    listOrder: ListType[],
-    listCheck: ListType[],
-    admDesc?: string,
-    checkerDesc?: string,
-}*/
-
-type ProductsType = {
-    id: string,
-    category: string,
-    name: string,
-    unit: string,
-    image: string
-}
-
-type CategoriesType = {
-    _id: string,
-    name: string,
-    slug: string
-}
-  
 
 
 const NewOrder = () => {
@@ -59,7 +11,7 @@ const NewOrder = () => {
     const api = useApi
             
     const [products, setProducts] = useState([] as ProductsType[])
-    const [supliersList, setSupliersList] = useState([] as Suplier[])
+    const [supliersList, setSupliersList] = useState([] as SuplierType[])
     const [list, setList] = useState([] as ListType[])
     const [description, setDescription] = useState('')
     const [suplier, setSuplier] = useState('')
@@ -167,7 +119,7 @@ const NewOrder = () => {
         const json = await api.addOrder(userAdmin, suplier, list, description)
 
         if(json.error) {
-            setError(json.error)
+            setError(json.error[0])
             setBlocked(false)
         } else {
             setSuccess({param: 'Order', msg: 'Order Created Successfully'})

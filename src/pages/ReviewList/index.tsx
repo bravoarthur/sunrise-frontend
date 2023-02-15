@@ -2,51 +2,9 @@ import styles from './ReviewList.module.scss'
 import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { ErrorType, ListType, OrderItemType } from '../../types/types'
 
-type ListType = {
-    idProduct: string,
-    product: string,
-    qtd: number,
-    unit: string,
-    image: string
-}
-type OrderListType = {
-    idProduct: string,
-    product: string,
-    qtd: number,
-    unit: string,
-    image: string,
-    divergent: boolean
-}
 
-type ErrorType = {
-    param: string,
-    msg: string
-}
-
-type OrderItemType = {
-    _id: string,
-    idSuplier: string,
-    suplierName: string,
-    idAdm: string,
-    userchecker?: string,
-    orderDate: Date,
-    checkDate?: Date,
-    status: string,
-    listOrder: OrderListType[],
-    listCheck: ListType[],
-    admDesc: string,
-    checkerDesc: string,
-}
-/*
-type ProductsType = {
-    id: string,
-    category: string,
-    name: string,
-    unit: string,
-    image: string
-}*/
-           
 
 const ReviewList = () => {
     
@@ -55,7 +13,7 @@ const ReviewList = () => {
     const api = useApi
     
     //const [products, setProducts] = useState([] as ProductsType[])
-    const [orderList, setOrderList] = useState([] as OrderListType[])    
+    const [orderList, setOrderList] = useState([] as ListType[])    
     const [list, setList] = useState([] as ListType[]) 
     const [error, setError] = useState({} as ErrorType)
     const [success, setSuccess] = useState({

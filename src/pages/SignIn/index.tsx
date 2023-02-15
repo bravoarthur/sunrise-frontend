@@ -3,6 +3,7 @@ import { doLogin } from "../../helpers/authHandler";
 import {useNavigate} from 'react-router-dom'
 import styles from "./SignIn.module.scss"
 import useApi from '../../helpers/SunriseAPI'
+import { ErrorType } from '../../types/types';
 
 type JsonType = {
     error?: any
@@ -10,10 +11,6 @@ type JsonType = {
     token?: string,
 }
 
-type ErrorType = {
-    param: string,
-    msg: string
-}
 
 
 function SignIn() {

@@ -3,22 +3,7 @@ import { doLogin } from "../../helpers/authHandler";
 import {useNavigate} from 'react-router-dom'
 import styles from "./SignUp.module.scss"
 import useApi from '../../helpers/SunriseAPI'
-
-/*type JsonType = {
-    error?: any
-    email?: string,
-    token?: string,
-}*/
-
-type ErrorType = {
-    param: string,
-    msg: string
-}
-
-/*type StateType = {
-    name: string,
-    _id: string, 
-}*/
+import { ErrorType } from '../../types/types';
 
 
 function SignUp() {

@@ -1,27 +1,7 @@
 import {useState, useEffect} from 'react'
 import styles from "./AddProducts.module.scss"
 import useApi from '../../helpers/SunriseAPI'
-
-
-type ErrorType = {
-    param: string,
-    msg: string
-}
-
-/*type ProductType = {
-    category: string;
-    name: string;
-    unit: "Kg" | 'Bag' | 'Tray' | 'Box' | 'Unit' | 'Default';
-    image: string;    
-};*/
-
-type CategoriesType = {
-    _id: string,
-    name: string,
-    slug: string
-}
-
-
+import { CategoriesType, ErrorType } from '../../types/types'
 
 function AddProducts() {
 

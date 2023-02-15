@@ -1,3 +1,6 @@
+@import "../../styles/variables";
+@import "../../styles/breakpoints";
+
 .pageContainer {
     max-width: 850px;
     margin: 0 auto;        
@@ -18,7 +21,7 @@
 
     .buttons{
     
-        background-color: #FF8100;
+        background-color: $menu-button;
         border-radius: 4px;
         color: #FFF;
         padding: 5px 10px;
@@ -28,7 +31,7 @@
         transition: all ease 0.4s;
     
         &:hover {
-            background-color: #E57706;
+            background-color: $menu-button-hover;
         }        
         
     }
@@ -58,7 +61,7 @@
         justify-content: space-around;
     
         .item{
-            background-color: #DDDD;
+            background-color: $card-color;
             border-radius: 10px;
             font-size: 10px;
             padding: 10px;
@@ -69,7 +72,7 @@
             transition: all ease 0.4s;
             &:hover{
                 border: 1px solid #AAA;
-                background-color: #AAAA;
+                background-color: $card-hover;
             }
             p {
                 margin: auto;
@@ -78,21 +81,21 @@
                 margin-top: auto;
             }
 
-            @media (min-width: 410px) and (max-width: 600px) {
+            @media (min-width: $mobile) and (max-width: $mobile-xl) {
                 width: 45%;
                 
             }
         
-            @media (min-width: 600px) and (max-width: 750px) {
+            @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
                 width: 45%;
                 
             }
         
-            @media (min-width: 750px) and (max-width: 1000px) {
+            @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
                 width: 30%;
                 font-size: 12px;
             }
-            @media (min-width: 1000px) {
+            @media (min-width: $desktop-xl) {
                 width: 30%;
                 font-size: 12px;
             }            

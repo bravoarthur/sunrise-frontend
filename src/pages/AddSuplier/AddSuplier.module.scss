@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .pageContainer {
     max-width: 750px;
     margin: 0 auto;  
@@ -11,17 +13,17 @@
 
 .errorMessage {
     margin: 10px 0;
-    background-color: #FFCACA;
+    background-color: $error-color;
     color: #000;
-    border: 2px solid #FF0000;
+    border: 2px solid $error-border;
     padding: 10px
 }
 
 .successMessage {
     margin: 10px 0;
-    background-color: #caffd9;
+    background-color: $success-color;
     color: #000;
-    border: 2px solid #00ff22;
+    border: 2px solid $success-border;
     padding: 10px;
     
 }
@@ -78,7 +80,7 @@
             justify-content: center;
 
             button {
-                background-color: #0089FF;
+                background-color: $action-button;
                 border: 0;
                 outline: 0;
                 margin-top: 30px;
@@ -90,7 +92,7 @@
                 cursor: pointer;
                             
                 &:hover {
-                   background-color: #006FCE;
+                   background-color: $action-button-hover;
                }    
             }
         }

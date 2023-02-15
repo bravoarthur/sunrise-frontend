@@ -2,49 +2,22 @@ import { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import { isLogged } from '../../helpers/authHandler';
 import useApi from '../../helpers/SunriseAPI'
+import { ListType, OrderListType } from '../../types/types';
 import styles from './Home.module.scss'
 
-type ListType = {
-    idProduct: string,
-    product: string,
-    qtd: number,
-    image: string
-}
-
-type OrderType = {
-    id: string,
-    suplier: string,
-    orderDate: string,
-    checkDate?: string,
-    userchecker?: string,
-    listOrder: ListType[],
-    listCheck: ListType[],
-    admDesc?: string,
-    checkerDesc?: string,
-}
-
-
-/*
-type CategoriesType = {
-    img: string,
-    name: string,
-    slug: string,
-    _id: string
-}*/
 
 function Home() {
 
     const api = useApi
 
     const logged = isLogged()
-
     
     //const [categories, setCategories] = useState([] as CategoriesType[])
-    const [orderList, setOrderList] = useState([] as OrderType[])
+    const [orderList, setOrderList] = useState([] as OrderListType[])
 
     useEffect(() => {
         const getOrder = async () => {
-            const olist: OrderType[] = await  api.getOrder({status: logged ? "DIVERGENT": "OPEN" })            
+            const olist: OrderListType[] = await  api.getOrder({status: logged ? "DIVERGENT": "OPEN" })            
             setOrderList(olist)
         }
         getOrder()

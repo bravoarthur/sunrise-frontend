@@ -1,42 +1,12 @@
 import Cookies from "js-cookie"
 import qs from 'qs'
+import { BodyType, ListType } from "../types/types"
 
-type ListType = {
-    idProduct: string,
-    product: string,
-    qtd: number,
-    unit: string,
-    image: string
-}
-
-type BodyType = {
-    email?: string,
-    password?: string,
-    token?: string
-    name?: string,
-    suplier?: string,
-    masterPass?: string,
-    category?: string,
-    image?: string,
-    unit?: string,
-    newProduct?: string,
-    newCategory?: string,
-    newSuplier?: string,
-    idAdm?: string,
-    idSuplier?: string,
-    listOrder?: ListType[],
-    desc?: string,
-    checkOrder?: ListType[],
-    idOrder?: string,
-    checkerDesc?: string,
-    userChecker?: string,
-    status?: string,
-    divergent?: number[],
-}
-
-/*type BodyFetchFile = {
-    files: FormData
+/*type BodyType = {
+    [key: string]: string | any | undefined
 }*/
+
+
 
 const BASE_API = 'http://192.168.0.3:4000'
 

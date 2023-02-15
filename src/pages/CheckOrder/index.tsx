@@ -2,43 +2,8 @@ import styles from './CheckOrder.module.scss'
 import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { ErrorType, ListType, OrderItemType } from '../../types/types'
 
-type ListType = {
-    idProduct: string,
-    product: string,
-    qtd: number,
-    unit: string,
-    image: string
-}
-
-type ErrorType = {
-    param: string,
-    msg: string
-}
-
-type OrderItemType = {
-    _id: string,
-    idSuplier: string,
-    suplierName: string,
-    idAdm: string,
-    userchecker?: string,
-    orderDate: Date,
-    checkDate?: Date,
-    status: string,
-    listOrder: ListType[],
-    listCheck: ListType[],
-    admDesc: string,
-    checkerDesc: string,
-}
-/*
-type ProductsType = {
-    id: string,
-    category: string,
-    name: string,
-    unit: string,
-    image: string
-}*/
-           
 
 const CheckOrder = () => {
     
@@ -106,7 +71,8 @@ const CheckOrder = () => {
                     product: item.product,
                     unit: item.unit,
                     qtd: value,
-                    image: item.image}
+                    image: item.image,
+                    divergent: item.divergent}
                 const newList = list.map(item => item)
                 newList.push(newItem)
                 newList.sort((a,b) => {

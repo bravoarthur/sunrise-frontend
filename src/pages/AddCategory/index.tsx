@@ -1,14 +1,7 @@
 import {useState} from 'react'
 import styles from "./AddCategory.module.scss"
 import useApi from '../../helpers/SunriseAPI'
-
-
-
-type ErrorType = {
-    param: string,
-    msg: string
-}
-
+import { ErrorType } from '../../types/types'
 
 function AddCategory() {
 
