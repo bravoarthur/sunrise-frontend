@@ -1,0 +1,108 @@
+@import "../../styles/variables";
+@import "../../styles/breakpoints";
+
+
+.tablePreview {
+    font-size: 10px;
+    border-radius: 12px;
+    background-color: #ebebeb;
+    box-shadow: 0px 0px 12px #999;
+    border: 1px solid #999;
+    width: 200px;
+    padding: 10px;
+    margin: 5px 20px 5px;  
+    height: 5px;   
+        
+    .thProduct {
+        width: 60%;
+        text-align: left;
+        font-size: 11px;
+    }
+
+    .thUnit {
+        text-align: center;
+        font-size: 11px;    
+    }
+
+    .thQtd {
+        font-size: 11px;
+
+    }
+    
+    td {
+        height: 35px;
+    }
+    
+    td:first-child {                
+        width: 60%; 
+        border-bottom-left-radius: 8px;  
+        border-top-left-radius: 8px; 
+        vertical-align: center;                
+    }
+
+    td:nth-child(2) {               
+        width: 25%; 
+        text-align: center;                
+    }   
+
+    td:last-child {                
+        width: 23%;
+        text-align: center;
+        border-bottom-right-radius: 8px;  
+        border-top-right-radius: 8px; 
+    } 
+
+    @media (min-width: $mobile) and (max-width: $mobile-xl) {
+        width: 200px;
+        font-size: 11px;
+    }
+
+    @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
+        width: 200px;
+        font-size: 12px;
+    }
+               
+      
+    @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
+        
+        width: 230px;
+        font-size: 14px;
+        .thProduct {
+            
+            font-size: 14px;
+        }
+    
+        .thUnit {            
+            font-size: 14px;    
+        }
+    
+        .thQtd {
+            font-size: 14px;
+    
+        }
+        
+        
+    }
+    
+    @media (min-width: $desktop-xl) {
+        
+        
+        width: 350px;
+        font-size: 16px;
+        .thProduct {            
+            font-size: 14px;
+        }
+    
+        .thUnit {            
+            font-size: 14px;    
+        }
+    
+        .thQtd {
+            font-size: 14px;
+    
+        }
+       
+    }
+}   
+
+

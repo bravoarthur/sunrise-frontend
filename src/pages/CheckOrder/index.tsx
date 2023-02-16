@@ -3,6 +3,7 @@ import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ErrorType, ListType, OrderItemType } from '../../types/types'
+import TablePreview from '../../components/TablePreview'
 
 
 const CheckOrder = () => {
@@ -242,31 +243,9 @@ const CheckOrder = () => {
                         <button onClick={handleEditAgain}>Edit Again</button>
                         <button onClick={handleConfirm}>Confirm </button>
 
-                    </div>                    
-
-                    <table className={styles.tablePreview}>
-                        <thead>
-                            <tr>
-                                <th className={styles.thProduct}>Product</th>
-                                <th className={styles.thUnit}>Unit</th>
-                                <th className={styles.thQtd}>Qtd</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {
-                                list.map((it, index) => 
-
-                            <tr key={it.idProduct}>
-                                <td>{it.product}</td>
-                                <td>{it.unit}</td>
-                                <td>{it.qtd}</td>
-                            </tr>                            
-
-                            )}
-                            
-                        </tbody>                
-                    </table> 
+                    </div>   
+                    <TablePreview list={list}/>                 
+                                    
                     
                 </div>
 

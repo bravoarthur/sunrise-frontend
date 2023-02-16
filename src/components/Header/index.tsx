@@ -18,9 +18,8 @@ function Header() {
             <div className={styles.container}>
                 <div className={styles.logo}>
                     <Link to='/'>
-                        <span className={styles.logo1}>S</span>
-                        <span className={styles.logo2}>-</span>
-                        <span className={styles.logo3}>R</span>
+                        <span className={styles.logo1}>Sunrise</span>
+                        
 
                     </Link>
                 </div>

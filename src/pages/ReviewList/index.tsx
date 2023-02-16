@@ -3,6 +3,7 @@ import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ErrorType, ListType, OrderItemType } from '../../types/types'
+import TablePreview from '../../components/TablePreview'
 
 
 
@@ -100,30 +101,7 @@ const ReviewList = () => {
                             )}
                         </tbody>                
                     </table>  
-                    <table className={styles.tablePreview}>
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Unit</th>
-                                <th>Qtd</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {
-                                list.map((it, index) => 
-
-                            <tr key={it.idProduct}>
-                                <td>{it.product}</td>
-                                <td>{it.unit}</td>
-                                <td>{it.qtd}</td>
-                            </tr>                            
-
-                            )}
-                            
-                        </tbody>                
-                    </table> 
-
+                    <TablePreview list={list}/>                   
                 </div>
 
             </div>

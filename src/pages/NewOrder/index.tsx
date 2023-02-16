@@ -3,6 +3,7 @@ import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { CategoriesType, ErrorType, ListType, ProductsType, SuplierType } from '../../types/types'
+import TablePreview from '../../components/TablePreview'
 
 
 
@@ -224,34 +225,11 @@ const NewOrder = () => {
                         </tbody>                
                     </table>   
 
-                    <table cellSpacing={0} className={styles.tablePreview}>
-                        <thead>
-                            <tr>
-                                <th >Product</th>
-                                <th >Unit</th>
-                                <th >Qtd</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {
-                                list.map((it, index) => 
-
-                            <tr key={it.idProduct}>
-                                <td>{it.product}</td>
-                                <td>{it.unit}</td>
-                                <td>{it.qtd}</td>
-                            </tr>                            
-
-                            )}
-                        </tbody>                
-                    </table> 
+                    <TablePreview list={list}/>                   
                     
                 </div>
 
-            </div>
-
-           
+            </div>           
                      
         </div>
 

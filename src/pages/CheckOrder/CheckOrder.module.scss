@@ -140,58 +140,7 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: 10px;
-
-        .tablePreview {
-            font-size: 11px;
-            border-radius: 12px;
-            background-color: #DDD;
-            box-shadow: 0px 0px 12px #999;
-            border: 1px solid #999;
-            width: 65%;
-            padding: 20px;
-            margin: 30px;  
-            height: 5px;   
-            
-            .thProduct {
-                width: 60%;
-                text-align: left;
-                font-size: 11px;
-            }
-    
-            .thUnit {
-                text-align: center;
-                font-size: 11px;    
-            }
-    
-            .thQtd {
-                font-size: 11px;
-    
-            }
-            
-            td {
-                height: 30px;
-            }
-            
-            td:first-child {                
-                width: 60%; 
-                border-bottom-left-radius: 8px;  
-                border-top-left-radius: 8px; 
-                vertical-align: center;                
-            }
-    
-            td:nth-child(2) {               
-                width: 25%; 
-                text-align: center;                
-            }   
-
-            td:last-child {                
-                width: 23%;
-                text-align: center;
-                border-bottom-right-radius: 8px;  
-                border-top-right-radius: 8px; 
-            }               
-        }
-
+        
         .divergence {
             display: flex;    
             align-items: center;  
@@ -223,30 +172,27 @@
         }
     }
 
-    @media (min-width: 410px) and (max-width: 600px) {
+    @media (min-width: $mobile) and (max-width: $mobile-xl) {
         width: 410px;
         
     }
 
-    @media (min-width: 600px) and (max-width: 750px) {
+    @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
         width: 600px;
         .tableBox {
             width: 90%;
         }
     }
 
-    @media (min-width: 750px) and (max-width: 1000px) {
+    @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
         min-width: 90%;
         .tableBox {
             width: 90%;
-        } 
-        .tablePreview {
-            min-width: 85%;
-        }
+        }         
         
     }
 
-    @media (min-width: 1000px) {
+    @media (min-width: $desktop-xl) {
         min-width: 80%;
         .tableBox {
             min-width: 90%;
@@ -258,19 +204,23 @@
                     font-size: 18px;
                 } 
                 
-                th {
+                .thProduct {
+                    
                     font-size: 18px;
+                }
+        
+                .thUnit {
+                    
+                    font-size: 18px;    
+                }
+        
+                .thQtd {
+                    font-size: 18px;
+        
                 }
             }
         }   
-        .tablePreview {
-            min-width: 95%;
-        } 
-
-        
-            
-            
-            
+              
     }
 
 }

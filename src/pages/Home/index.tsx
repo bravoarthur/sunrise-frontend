@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import { isLogged } from '../../helpers/authHandler';
 import useApi from '../../helpers/SunriseAPI'
-import { ListType, OrderListType } from '../../types/types';
+import { OrderListType } from '../../types/types';
 import styles from './Home.module.scss'
 
 

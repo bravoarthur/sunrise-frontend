@@ -81,7 +81,7 @@
            }     
         }  
 
-        @media (min-width: 750px) and (max-width: 1000px) {
+        @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
 
             .inputDesc {                
                 flex-direction: row;
@@ -110,7 +110,7 @@
             }
         }
     
-        @media (min-width: 1000px) {
+        @media (min-width: $desktop-xl) {
             .inputDesc {                
                 flex-direction: row;
                 font-size: 15px; 
@@ -248,57 +248,18 @@
                 background-color: $table-tr-color;
             }
             
-        }
-
-        .tablePreview {
-            border: 1px solid #aeabab;
-            margin: 10px;
-            padding: 5px;
-            border-radius: 12px;
-            background-color: $table-preview-color;
-            width: 45%;
-            box-shadow: 0px 0px 20px #999;
-            height: 10px;
-            font-size: 8px;
-            //display: block;}
-            
-            th {
-                font-size: 8px;                
-            }
-          
-            td:first-child {                
-                width: 60%;                 
-                               
-            }            
-
-            td:nth-child(2) {                
-                width: 20%;                
-                white-space: nowrap;
-                text-align: center;
-            }
-
-            td:last-child {                
-                width: 20%;
-                text-align: center;
-                
-            }          
-            
-            td, tr {
-
-                height: 20px;
-                
-            }        
-            
-        }
+        }        
     }    
 
-    @media (min-width: 600px) and (max-width: 750px) {
+    @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
         min-width: 90%;
         
     }
 
-    @media (min-width: 750px) and (max-width: 1000px) {
+    @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
         min-width: 90%;
+        padding-left: 5px;
+        padding-right: 10px;
 
         
         .FiltersBox{            
@@ -339,26 +300,14 @@
                 }     
             }
     
-            .tablePreview {                
-                margin: 25px;                
-                width: 30%;                
-                font-size: 11px;
-                //display: block;}
-                
-                th {
-                    font-size: 9px;                
-                }         
-                
-                td, tr {
-    
-                    height: 30px;
-                }        
-            }
+            
         }       
     }
 
-    @media (min-width: 1000px) {
+    @media (min-width: $desktop-xl) {
         min-width: 95%;
+        padding-left: 10px;
+        padding-right: 20px;
 
         .FiltersBox{            
             font-size: 16px;            
@@ -403,23 +352,8 @@
                 .thQtd {
                     font-size: 15px;    
                 }    
-            }
-    
-            .tablePreview {                
-                margin: 25px;                
-                width: 40%;                
-                font-size: 14px;
-                //display: block;}
-                
-                th {
-                    font-size: 12px;                
-                }         
-                
-                td, tr {
-    
-                    height: 40px;
-                }        
-            }
+            }    
+            
         }   
     }
 }
