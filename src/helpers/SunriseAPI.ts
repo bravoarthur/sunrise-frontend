@@ -136,7 +136,7 @@ const apiFetchPut = async (endPoint: string, body: BodyType) => {
 }
 
 
-const BravoStoreAPI = {
+const SunriseAPI = {
 
     login: async (email: string, password: string) => {
 
@@ -258,4 +258,4 @@ const BravoStoreAPI = {
     },
 }
 
-export default  BravoStoreAPI
+export default  SunriseAPI
