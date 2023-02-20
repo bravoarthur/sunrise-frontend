@@ -113,5 +113,12 @@
     
 }
 
+.errorMessage {
+    margin: 10px 0;
+    background-color: $error-color;
+    color: #000;
+    border: 2px solid $error-border;
+    padding: 10px
+}
 
   

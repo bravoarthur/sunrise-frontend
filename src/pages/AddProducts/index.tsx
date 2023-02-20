@@ -21,8 +21,14 @@ function AddProducts() {
     
     useEffect(() => {
         const getCats = async () => {
-            const catlist: CategoriesType[] = await  api.getCategories()            
-            setCategories(catlist)
+            const catlist = await  api.getCategories()
+
+            if(catlist.error) {
+                setError(catlist.error[0])                           
+                setDisabled(false)
+            } else {                
+                setCategories(catlist)
+            }            
         }
         getCats()
     }, [api])    

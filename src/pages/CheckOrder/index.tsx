@@ -34,10 +34,15 @@ const CheckOrder = () => {
                 return
             }
            
-            const order: OrderItemType = await  api.getOrderItem({}, id)            
-            
-            setOrderList(order.listOrder)
+            const order = await  api.getOrderItem({}, id) 
+            if(order.error) {
+                setError(order.error[0])                           
+                setBlocked(false)
+            } else {                
+                setOrderList(order.listOrder)
+            } 
         }
+        
         getOrder()
     }, [api, id])   
    

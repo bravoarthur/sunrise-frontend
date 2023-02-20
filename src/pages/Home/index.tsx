@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom'
 import { isLogged } from '../../helpers/authHandler';
 import useApi from '../../helpers/SunriseAPI'
-import { OrderListType } from '../../types/types';
+import { ErrorType, OrderListType } from '../../types/types';
 import styles from './Home.module.scss'
 
 
@@ -11,14 +11,19 @@ function Home() {
     const api = useApi
 
     const logged = isLogged()
-    
+        
     //const [categories, setCategories] = useState([] as CategoriesType[])
     const [orderList, setOrderList] = useState([] as OrderListType[])
+    const [error, setError] = useState({} as ErrorType)
 
     useEffect(() => {
         const getOrder = async () => {
-            const olist: OrderListType[] = await  api.getOrder({status: logged ? "DIVERGENT": "OPEN" })            
-            setOrderList(olist)
+            const olist = await  api.getOrder({status: logged ? "DIVERGENT": "OPEN" }) 
+            if(olist.error) {                
+                setError(olist.error[0])
+            } else {                
+                setOrderList(olist)
+            } 
         }
         getOrder()
     }, [api, logged])    
@@ -27,18 +32,23 @@ function Home() {
     return (
 
         <div className={styles.pageContainer}>
+            {error.param && 
+                <div className={styles.errorMessage}>
+                     {`${error.param} error - ${error.msg}`}
+                </div>
+                }
             {
                 logged &&  
 
                 <div className={styles.butContainer}>                    
                     
-                    <Link className={styles.buttons} to={`/addcategory`}>        
+                    <Link className={styles.buttons} data-testid='loggedButtons' to={`/addcategory`}>        
                         Add Category
                     </Link>     
-                    <Link className={styles.buttons} to={`/addsuplier`}>        
+                    <Link className={styles.buttons} data-testid='loggedButtons' to={`/addsuplier`}>        
                         Add suplier
                     </Link>
-                    <Link className={styles.buttons} to={`/addproducts`}>        
+                    <Link className={styles.buttons} data-testid='loggedButtons' to={`/addproducts`}>        
                         Add product
                     </Link>                              
 
@@ -51,7 +61,7 @@ function Home() {
 
                     {orderList.map((item,index) => {
 
-                       return <Link key={index} className={styles.item} to={logged? `/review/${item.id}` : `/checkitem/${item.id}`}>
+                       return <Link key={index} data-testid="orderCard" className={styles.item} to={logged? `/review/${item.id}` : `/checkitem/${item.id}`}>
                        
                                         
                                     <h4>Suplier: {item.suplier}</h4>

@@ -2,7 +2,7 @@ import styles from './ReviewList.module.scss'
 import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { ErrorType, ListType, OrderItemType } from '../../types/types'
+import { ErrorType, ListType} from '../../types/types'
 import TablePreview from '../../components/TablePreview'
 
 
@@ -28,9 +28,13 @@ const ReviewList = () => {
             if(!id) {  
                 return
             }           
-            const order: OrderItemType = await  api.getOrderItem({}, id) 
-            setOrderList(order.listOrder)
-            setList(order.listCheck)
+            const order = await  api.getOrderItem({}, id) 
+            if(order.error) {
+                setError(order.error[0])
+            } else {                
+                setOrderList(order.listOrder)
+                setList(order.listCheck)
+            }             
         }
         getOrder()
     }, [api, id])          

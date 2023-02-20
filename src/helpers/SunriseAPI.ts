@@ -8,12 +8,14 @@ import { BodyType, ListType } from "../types/types"
 
 
 
-const BASE_API = 'http://192.168.0.3:4000'
+//const BASE_API = 'http://192.168.0.3:4000'
+const BASE_API = 'http://localhost:4000'
 
 const apiFetchPost = async (endPoint: string, body: BodyType) => {
 
     let token = Cookies.get('token') 
     
+    let serverOff = {error: [] as object[] }   
     const res = await fetch(BASE_API+endPoint, {
         method: 'POST',
         headers: {
@@ -24,14 +26,16 @@ const apiFetchPost = async (endPoint: string, body: BodyType) => {
         //'x-access-token':
         body: JSON.stringify(body),    
         
-    })
-    
-    const json = await res.json()
+    }).catch(err => {
+        serverOff.error = [{param: 'Server', msg: "Server is not Available"}]
+        return err        
+    })    
 
-    /*if(json.notallowed) {
-        go to /signin
-    }
-    */
+    if( serverOff.error.length>0) {        
+        return serverOff
+    }    
+    const json = await res.json()
+    
     console.log(json)
 
     return json
@@ -41,7 +45,8 @@ const apiFetchPost = async (endPoint: string, body: BodyType) => {
 const apiFetchFile = async (endPoint: string, body:FormData) => {
 
     let token = Cookies.get('token') 
-    
+
+    let serverOff= {error: [] as object[]}
     const res = await fetch(BASE_API+endPoint, {
         method: 'POST',
         headers: {            
@@ -49,7 +54,14 @@ const apiFetchFile = async (endPoint: string, body:FormData) => {
         },        
         body: body,    
         
-    })
+    }).catch(err => {
+        serverOff.error = [{param: 'Server', msg: "Server is not Available"}]
+        return err        
+    })    
+
+    if( serverOff.error.length>0) {        
+        return serverOff
+    }    
     
     const json = await res.json()
 
@@ -65,8 +77,9 @@ const apiFetchFile = async (endPoint: string, body:FormData) => {
 
 const apiFetchGet = async (endPoint: string, body: BodyType = {}) => {
 
-    let token = Cookies.get('token') 
+    let token = Cookies.get('token')     
     
+    let serverOff= {error: [] as object[]}
     const res = await fetch(`${BASE_API+endPoint}?${qs.stringify(body)}`, {
         method: 'GET',
         headers: {
@@ -75,14 +88,17 @@ const apiFetchGet = async (endPoint: string, body: BodyType = {}) => {
             'Authorization': `Bearer${token}`
         },
         //'x-access-token':        
-    })
-    
-    const json = await res.json()
+    }).catch(err => {        
+        serverOff.error = [{param: 'Server', msg: "Server is not Available"}]
+        
+        return err        
+    })    
 
-    /*if(json.notallowed) {
-        go to /signin
-    }
-    */
+    if( serverOff.error.length>0) {        
+        return serverOff
+    }    
+    
+    const json = await res.json()    
     console.log(json)
 
     return json
@@ -93,6 +109,7 @@ const apiFetchPut = async (endPoint: string, body: BodyType) => {
 
     let token = Cookies.get('token') 
     
+    let serverOff= {error: [] as object[]}
     const res = await fetch(BASE_API+endPoint, {
         method: 'PUT',
         headers: {
@@ -102,7 +119,14 @@ const apiFetchPut = async (endPoint: string, body: BodyType) => {
         },
         //'x-access-token':
         body: JSON.stringify(body)
-    })
+    }).catch(err => {
+        serverOff.error = [{param: 'Server', msg: "Server is not Available"}]
+        return err        
+    })    
+
+    if( serverOff.error.length>0) {        
+        return serverOff
+    }    
     
     const json = await res.json()
 
@@ -133,7 +157,10 @@ const BravoStoreAPI = {
     
     getCategories: async () => {
 
-        const json = await apiFetchGet('/category/list', {})         
+        const json = await apiFetchGet('/category/list', {})   
+        if (json.error) {
+            return json
+        }    
         return json.categoryList
 
     },
@@ -141,6 +168,9 @@ const BravoStoreAPI = {
     getOrder: async (options: {}) => {
 
         const json = await apiFetchGet('/order/list', options) 
+        if (json.error) {
+            return json
+        }    
         
         return json.orderList
 
@@ -149,6 +179,9 @@ const BravoStoreAPI = {
     getOrderItem: async (options: {}, id: string) => {
 
         const json = await apiFetchGet(`/order/item/${id}`, options) 
+        if (json.error) {
+            return json
+        }    
         
         return json.order
 
@@ -157,6 +190,9 @@ const BravoStoreAPI = {
     getProductsList: async (options: {}, ) => {
 
         const json = await apiFetchGet(`/products/list`, options) 
+        if (json.error) {
+            return json
+        }    
         
         return json.productsList
 
@@ -165,6 +201,9 @@ const BravoStoreAPI = {
     getSupliersList: async (options: {}, ) => {
 
         const json = await apiFetchGet(`/suplier/list`, options) 
+        if (json.error) {
+            return json
+        }    
         
         return json.suplierList
 

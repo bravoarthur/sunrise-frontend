@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.2",
+    "nock": "^13.3.0",
     "typescript-plugin-css-modules": "^4.1.1"
   }
 }

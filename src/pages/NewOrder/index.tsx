@@ -30,23 +30,38 @@ const NewOrder = () => {
     useEffect(() => {
         const getProducts = async () => {
             const pList = await  api.getProductsList({q: textFilter, cat: catFilter})            
-            setProducts(pList)
+            if(pList.error) {
+                setError(pList.error[0])                           
+                setBlocked(false)
+            } else {                
+                setProducts(pList)
+            }
         }
         getProducts()
     }, [api, textFilter, catFilter])
 
     useEffect(() => {
         const getSupliersList = async () => {
-            const supList = await  api.getSupliersList({})            
-            setSupliersList(supList)
+            const supList = await  api.getSupliersList({})   
+            if(supList.error) {
+                setError(supList.error[0])                           
+                setBlocked(false)
+            } else {                
+                setSupliersList(supList)
+            }    
         }
         getSupliersList()
     }, [api])
 
     useEffect(() => {
         const getCategories = async () => {
-            const catList = await  api.getCategories()            
-            setCategories(catList)
+            const catList = await  api.getCategories() 
+            if(catList.error) {
+                setError(catList.error[0])                           
+                setBlocked(false)
+            } else {                
+                setCategories(catList)
+            }   
         }
         getCategories()
     }, [api])

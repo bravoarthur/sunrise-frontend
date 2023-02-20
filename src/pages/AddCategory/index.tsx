@@ -19,8 +19,8 @@ function AddCategory() {
         setDisabled(true) 
         setError({} as ErrorType)       
 
-        const json = await api.addSuplier(name)
-
+        const json = await api.addCategory(name)
+        console.log(json)
         if(json.error) {
             setError(json.error[0])            
             setDisabled(false)
@@ -28,7 +28,7 @@ function AddCategory() {
         } else {            
             setDisabled(false)
             setName('')            
-            setSuccess('Product Added Successfully')  
+            setSuccess('Category Added Successfully')  
             setTimeout(() => {
                 setSuccess('')
             },5000)             
@@ -61,7 +61,7 @@ function AddCategory() {
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Name </div>
                         <div className={styles.areainput}>
-                            <input type="text" required disabled={disabled} value={name} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}/>
+                            <input data-testid='inputAddCategory' type="text" required disabled={disabled} value={name} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}/>
                         </div>
                     </label>                    
                     
