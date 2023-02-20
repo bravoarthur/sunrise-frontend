@@ -29,7 +29,7 @@ function AddSuplier() {
         } else {            
             setDisabled(false)
             setName('')            
-            setSuccess('Product Added Successfully')  
+            setSuccess('Suplier Added Successfully')  
             setTimeout(() => {
                 setSuccess('')
             },5000)             
@@ -62,7 +62,7 @@ function AddSuplier() {
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Name </div>
                         <div className={styles.areainput}>
-                            <input type="text" required disabled={disabled} value={name} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}/>
+                            <input data-testid='inputAddSuplier' type="text" required disabled={disabled} value={name} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}/>
                         </div>
                     </label>                    
                     
