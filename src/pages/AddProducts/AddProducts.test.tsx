@@ -3,8 +3,6 @@ import userEvent from "@testing-library/user-event";
 import nock from 'nock'
 import { BrowserRouter } from "react-router-dom";
 import AddProducts from ".";
-import SunriseAPI from "../../helpers/SunriseAPI";
-
 
 const mockedCategoryList = {categoryList: [{_id: 'f2d1fd2f0d',
 name: 'Cat1',
@@ -55,7 +53,7 @@ describe("Add Product...", () => {
         const selectUnit = await screen.findByTestId('unitProductSelect')
         const selectCategory = await screen.findByTestId('categoryProductSelect')
         fireEvent.change(inputName, { target: { value: "New Product"}})        
-        const option = await screen.findByText('Cat1')
+        expect(await screen.findByText('Cat1')).toBeTruthy()
 
         userEvent.selectOptions(selectUnit, ["Kg"])        
         userEvent.selectOptions(selectCategory, ['Cat1'])                      
@@ -92,7 +90,7 @@ describe("Add Product...", () => {
         const selectUnit = await screen.findByTestId('unitProductSelect')
         const selectCategory = await screen.findByTestId('categoryProductSelect')
         fireEvent.change(inputName, { target: { value: "New Product"}})        
-        const option = await screen.findByText('Cat1')
+        expect(await screen.findByText('Cat1')).toBeTruthy()
 
         userEvent.selectOptions(selectUnit, ["Kg"])        
         userEvent.selectOptions(selectCategory, ['Cat1'])                      
@@ -104,8 +102,6 @@ describe("Add Product...", () => {
        
     })    
 });
-
-
 
 
 
