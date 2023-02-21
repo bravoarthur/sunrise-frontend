@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, waitFor} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import nock from 'nock'
 import { BrowserRouter } from "react-router-dom";
 import AddProducts from ".";
@@ -14,11 +15,11 @@ name: 'Cat3',
 slug: 'Cat3'}]} 
 
 
-
+const mockedfn = jest.fn()
 jest.mock("../../helpers/SunriseAPI", () => {
     const SunriseAPI = jest.requireActual("../../helpers/SunriseAPI")
-    SunriseAPI.default.addProduct = jest.fn(() => {return {status: 'successfully'}})
-    console.log(SunriseAPI)
+    SunriseAPI.default.addProduct = () => mockedfn()
+    
     return SunriseAPI
        
 });
@@ -28,8 +29,12 @@ describe("Add Product...", () => {
 
     afterEach(() => nock.cleanAll())
     
-    it("Call the API when press Button", async () => {    
+    it("Call the API when press Button", async () => {   
         
+        mockedfn.mockImplementation(async (name: string) => {
+            return {status: 'success'}
+        })                
+
         nock('http://localhost:4000')        
         .intercept('/category/list', 'OPTIONS' )
         .query({})
@@ -45,88 +50,59 @@ describe("Add Product...", () => {
         
         render(<AddProducts/>, {wrapper: BrowserRouter})
 
-
         const buttonAdd =  screen.getByText('ADD ITEM')
         const inputName = screen.getByTestId('nameProductInput')
-        const selectUnit = screen.getByTestId('unitProductSelect')
-        const selectCategory = screen.getByTestId('categoryProductSelect')
-        
-        fireEvent.change(inputName, { target: { value: "New Product"}})
-        fireEvent.change(selectUnit, { target: { value: "TESTE"}} )        
-        const options = await screen.findAllByTestId('catProductOptions')
-        fireEvent.change(selectCategory, { target: { value: options[1]}}  )
-       
-        console.log(options)
+        const selectUnit = await screen.findByTestId('unitProductSelect')
+        const selectCategory = await screen.findByTestId('categoryProductSelect')
+        fireEvent.change(inputName, { target: { value: "New Product"}})        
+        const option = await screen.findByText('Cat1')
+
+        userEvent.selectOptions(selectUnit, ["Kg"])        
+        userEvent.selectOptions(selectCategory, ['Cat1'])                      
 
         fireEvent.click(buttonAdd)
-                          
-       //await waitFor(() =>expect(mockedAddProduct).toBeCalledTimes(1))
-       //expect(await screen.findByText('test store', {exact: false})).toBeTruthy()
-       expect( await screen.findByText('Product Added Successfully')).toBeTruthy()
-
-
+                     
+        await waitFor(() =>expect(mockedfn).toBeCalledTimes(1))
+        expect(await screen.findByText('Product Added Successfully')).toBeTruthy()
+       
     })
-    /*
-    it("Show Success Message", async () => {    
-        mockedAddProduct.mockImplementation(async (name: string) => {
-            return {status: 'New Suplier Added'}
-        })   
+    it("Show Error Message when Server responds problem", async () => {   
+        
+        mockedfn.mockImplementation(async (name: string) => {
+            return {error: [{param: 'Server', msg: "Server is not Available"}]}
+        })                
 
         nock('http://localhost:4000')        
         .intercept('/category/list', 'OPTIONS' )
+        .query({})
         .reply(200)        
         .defaultReplyHeaders({
             'access-control-allow-origin': '*',
             'access-control-allow-credentials': 'true',  
             'Access-Control-allow-Headers': '*'                     
         })
-        .post('/category/list')        
-        .reply(200, {
-            body: {status: 'New Suplier Added'}
-        })
-                
+        .get('/category/list')
+        .query({})
+        .reply(200, {categoryList: mockedCategoryList.categoryList})                          
         
-        render(<AddSuplier/>, {wrapper: BrowserRouter})
+        render(<AddProducts/>, {wrapper: BrowserRouter})
 
-        const buttonAdd =  screen.getByText('ADD SUPPLIER')
-        const categoryField = screen.getByTestId('inputAddSuplier')
-                  
-        fireEvent.change(categoryField, { target: { value: "New Suplier"}})
+        const buttonAdd =  screen.getByText('ADD ITEM')
+        const inputName = screen.getByTestId('nameProductInput')
+        const selectUnit = await screen.findByTestId('unitProductSelect')
+        const selectCategory = await screen.findByTestId('categoryProductSelect')
+        fireEvent.change(inputName, { target: { value: "New Product"}})        
+        const option = await screen.findByText('Cat1')
+
+        userEvent.selectOptions(selectUnit, ["Kg"])        
+        userEvent.selectOptions(selectCategory, ['Cat1'])                      
+
         fireEvent.click(buttonAdd)
-                                  
-       expect( await screen.findByText('Suplier Added Successfully')).toBeTruthy()
-
-    })   
-    it("Show Error Message when API fails", async () => {    
-        mockedAddProduct.mockImplementation(async (name: string) => {
-            return {error: [{param: 'Server', msg: "Server is not Available"}]}
-        })   
-
-        nock('http://localhost:4000')        
-        .intercept('/category/list', 'OPTIONS' )
-        .reply(400)        
-        .defaultReplyHeaders({
-            'access-control-allow-origin': '*',
-            'access-control-allow-credentials': 'true',  
-            'Access-Control-allow-Headers': '*'                     
-        })
-        .post('/category/list')        
-        .reply(400, {
-            body: {error: [{param: 'Server', msg: "Server is not Available"}]}
-        })                
-        
-        render(<AddSuplier/>, {wrapper: BrowserRouter})
-
-        const buttonAdd =  screen.getByText('ADD SUPPLIER')
-        const categoryField = screen.getByTestId('inputAddSuplier')
-                  
-        fireEvent.change(categoryField, { target: { value: "New Suplier"}})
-        fireEvent.click(buttonAdd)
-                                  
-       expect( await screen.findByText('Server is not Available', {exact: false})).toBeTruthy()
-
-    })  */
-    
+                     
+        await waitFor(() =>expect(mockedfn).toBeCalledTimes(1))
+        expect(await screen.findByText('Server is not Available', {exact: false})).toBeTruthy()
+       
+    })    
 });
 
 

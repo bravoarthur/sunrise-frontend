@@ -42,6 +42,7 @@ function AddProducts() {
         setDisabled(true) 
         setError({} as ErrorType)  
         console.log(productCategorie)
+        console.log(unit)
         const dataForm = new FormData()
 
         if(img) {
@@ -124,7 +125,7 @@ function AddProducts() {
                         <div className={styles.areainput}>
                             <select data-testid='categoryProductSelect' required disabled={disabled} value={productCategorie} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setProductCategorie(event.target.value)}>
                                 <option></option>
-                                {categories.map((item, index) => <option data-testid='catProductOptions' value={item._id} key={index}>{item.name}</option>)}
+                                {categories.map((item, index) => <option value={item._id} key={index}>{item.name}</option>)}
                             </select>
                         </div>
                     </label>
