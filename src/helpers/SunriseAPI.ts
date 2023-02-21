@@ -155,14 +155,12 @@ const SunriseAPI = {
     },
    
     
-    getCategories: async () => {
-
+    getCategories: async () => {        
         const json = await apiFetchGet('/category/list', {})   
-        if (json.error) {
+        if (json.error) {            
             return json
-        }    
+        }           
         return json.categoryList
-
     },
 
     getOrder: async (options: {}) => {

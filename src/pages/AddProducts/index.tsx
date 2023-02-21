@@ -21,6 +21,7 @@ function AddProducts() {
     
     useEffect(() => {
         const getCats = async () => {
+            
             const catlist = await  api.getCategories()
 
             if(catlist.error) {
@@ -40,7 +41,7 @@ function AddProducts() {
         event.preventDefault()
         setDisabled(true) 
         setError({} as ErrorType)  
-        
+        console.log(productCategorie)
         const dataForm = new FormData()
 
         if(img) {
@@ -102,7 +103,7 @@ function AddProducts() {
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Name </div>
                         <div className={styles.areainput}>
-                            <input type="text" required disabled={disabled} value={name} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}/>
+                            <input data-testid='nameProductInput' type="text" required disabled={disabled} value={name} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}/>
                         </div>
                     </label>
 
@@ -110,7 +111,7 @@ function AddProducts() {
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Unit</div>
                         <div className={styles.areainput}>
-                            <select required disabled={disabled} value={unit} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setUnit(event.target.value)}>
+                            <select data-testid='unitProductSelect' required disabled={disabled} value={unit} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setUnit(event.target.value)}>
                                 <option></option>
                                 {units.map((item, index) => <option value={item} key={index}>{item}</option>)}
 
@@ -121,9 +122,9 @@ function AddProducts() {
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Category</div>
                         <div className={styles.areainput}>
-                            <select required disabled={disabled} value={productCategorie} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setProductCategorie(event.target.value)}>
+                            <select data-testid='categoryProductSelect' required disabled={disabled} value={productCategorie} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setProductCategorie(event.target.value)}>
                                 <option></option>
-                                {categories.map((item, index) => <option value={item._id} key={index}>{item.name}</option>)}
+                                {categories.map((item, index) => <option data-testid='catProductOptions' value={item._id} key={index}>{item.name}</option>)}
                             </select>
                         </div>
                     </label>

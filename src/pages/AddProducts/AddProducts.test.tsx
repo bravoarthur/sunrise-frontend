@@ -2,7 +2,8 @@ import { fireEvent, render, screen, waitFor} from "@testing-library/react";
 import nock from 'nock'
 import { BrowserRouter } from "react-router-dom";
 import AddProducts from ".";
-import useApi from '../../helpers/SunriseAPI'
+import SunriseAPI from "../../helpers/SunriseAPI";
+
 
 const mockedCategoryList = {categoryList: [{_id: 'f2d1fd2f0d',
 name: 'Cat1',
@@ -12,20 +13,26 @@ slug: 'Cat2'},{_id: 'f2dfgfd2f0d',
 name: 'Cat3',
 slug: 'Cat3'}]} 
 
-jest.mock('../../helpers/SunriseAPI')
-const mockedAddProduct = jest.mocked(useApi.addProduct)
 
-describe("Add Suplier...", () => {    
+
+jest.mock("../../helpers/SunriseAPI", () => {
+    const SunriseAPI = jest.requireActual("../../helpers/SunriseAPI")
+    SunriseAPI.default.addProduct = jest.fn(() => {return {status: 'successfully'}})
+    console.log(SunriseAPI)
+    return SunriseAPI
+       
+});
+
+
+describe("Add Product...", () => {    
 
     afterEach(() => nock.cleanAll())
     
     it("Call the API when press Button", async () => {    
-        mockedAddProduct.mockImplementation(async (files: FormData) => {
-            return {status: 'New Product Added'}
-        })   
-
+        
         nock('http://localhost:4000')        
         .intercept('/category/list', 'OPTIONS' )
+        .query({})
         .reply(200)        
         .defaultReplyHeaders({
             'access-control-allow-origin': '*',
@@ -33,19 +40,33 @@ describe("Add Suplier...", () => {
             'Access-Control-allow-Headers': '*'                     
         })
         .get('/category/list')
+        .query({})
         .reply(200, {categoryList: mockedCategoryList.categoryList})                          
         
         render(<AddProducts/>, {wrapper: BrowserRouter})
 
-        const buttonAdd =  screen.getByText('ADD SUPPLIER')
-        const categoryField = screen.getByTestId('inputAddSuplier')
-                  
-        fireEvent.change(categoryField, { target: { value: "New Suplier"}})
-        fireEvent.click(buttonAdd)
-                                          
-       await waitFor(() =>expect(mockedAddProduct).toBeCalledTimes(1))
 
-    })/*
+        const buttonAdd =  screen.getByText('ADD ITEM')
+        const inputName = screen.getByTestId('nameProductInput')
+        const selectUnit = screen.getByTestId('unitProductSelect')
+        const selectCategory = screen.getByTestId('categoryProductSelect')
+        
+        fireEvent.change(inputName, { target: { value: "New Product"}})
+        fireEvent.change(selectUnit, { target: { value: "TESTE"}} )        
+        const options = await screen.findAllByTestId('catProductOptions')
+        fireEvent.change(selectCategory, { target: { value: options[1]}}  )
+       
+        console.log(options)
+
+        fireEvent.click(buttonAdd)
+                          
+       //await waitFor(() =>expect(mockedAddProduct).toBeCalledTimes(1))
+       //expect(await screen.findByText('test store', {exact: false})).toBeTruthy()
+       expect( await screen.findByText('Product Added Successfully')).toBeTruthy()
+
+
+    })
+    /*
     it("Show Success Message", async () => {    
         mockedAddProduct.mockImplementation(async (name: string) => {
             return {status: 'New Suplier Added'}
