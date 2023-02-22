@@ -45,9 +45,6 @@ function SignUp() {
             navigate('/')   
             navigate(0)        
         }
-
-
-
     }
 
 
@@ -88,18 +85,18 @@ function SignUp() {
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Password</div>
                         <div className={styles.areainput}>
-                            <input type="password" required disabled={disabled} value={password} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}/>
+                            <input type="password" data-testid='passwordSignup' required disabled={disabled} value={password} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}/>
                         </div>
                     </label>
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Confirm Password</div>
                         <div className={styles.areainput}>
-                            <input type="password" required disabled={disabled} value={confirmPass} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setConfirmPass(event.target.value)}/>
+                            <input type="password" data-testid='passwordConfirmSignup' required disabled={disabled} value={confirmPass} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setConfirmPass(event.target.value)}/>
                         </div>
                     </label>
                     <div className={styles.areaButton}>
                         
-                        <button disabled={disabled}>Sign Up</button>
+                        <button disabled={disabled} data-testid="buttonRegister">Sign Up</button>
                         
                     </div>
                 </form>
