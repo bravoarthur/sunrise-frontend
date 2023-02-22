@@ -110,9 +110,9 @@ const NewOrder = () => {
             }
         }    
     }
-
-    const handleSendOrder = async () => {
-
+    
+    const handleSendOrder = async () => {        
+        
         setError({param: '', msg: ''})
         setBlocked(true)
         if(!userAdmin) {
@@ -131,7 +131,6 @@ const NewOrder = () => {
             setBlocked(false)
             return
         } 
-
         const json = await api.addOrder(userAdmin, suplier, list, description)
 
         if(json.error) {
@@ -179,7 +178,7 @@ const NewOrder = () => {
                 <label className={styles.inputSuplier}>
                     <div>Select the Suplier: </div>
                     <div>
-                        <select value={suplier} disabled={blocked} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setSuplier(event.target.value)}>
+                        <select data-testid="newOrderSuplier" value={suplier} disabled={blocked} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setSuplier(event.target.value)}>
                             <option></option>
                             {supliersList.map((item, index) => <option value={item._id} key={item._id}>{item.name}</option>)}
 
@@ -233,7 +232,7 @@ const NewOrder = () => {
                                 <td><img src={item.image} width={40} height={40} className={styles.image} alt=''></img></td>
                                 <td>{item.name}</td>
                                 <td>{item.unit}</td>
-                                <td><input type="number" disabled={blocked} min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
+                                <td><input data-testid={`newOrderProductQtd${index}`} type="number" disabled={blocked} min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
                             </tr>                            
 
                             )}
