@@ -80,7 +80,7 @@ function SignIn() {
                     </label>
                     <div className={styles.areaButton}>
                         
-                        <button disabled={disabled}>Log In</button>
+                        <button disabled={disabled} data-testid='buttonLogin'>LogIn</button>
                        
                     </div>
                 </form>
