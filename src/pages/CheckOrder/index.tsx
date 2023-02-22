@@ -2,7 +2,7 @@ import styles from './CheckOrder.module.scss'
 import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { ErrorType, ListType, OrderItemType } from '../../types/types'
+import { ErrorType, ListType} from '../../types/types'
 import TablePreview from '../../components/TablePreview'
 
 

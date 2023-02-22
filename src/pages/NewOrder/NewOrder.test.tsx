@@ -4,7 +4,7 @@ import nock from 'nock'
 import { BrowserRouter } from "react-router-dom";
 import NewOrder from ".";
 import { ListType } from "../../types/types";
-import Cookie from 'js-cookie'
+
 
 
 const mockedCategoryList = {categoryList: [{_id: 'f2d1fd2f0d',
