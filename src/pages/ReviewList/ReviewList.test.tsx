@@ -1,9 +1,7 @@
 import { fireEvent, render, screen, waitFor} from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import nock from 'nock'
 import { BrowserRouter } from "react-router-dom";
 import ReviewList from ".";
-import { ListType } from "../../types/types";
 
 
 const mockedOrderItem = {
