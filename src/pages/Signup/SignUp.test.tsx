@@ -15,7 +15,7 @@ describe("Register...", () => {
     it("Call 'doLogin' when server res ok", async () => {                  
 
         nock('http://localhost:4000')        
-        .intercept('/user/register', 'OPTIONS' )        
+        .intercept('/user/register', 'OPTIONS')        
         .reply(200)        
         .defaultReplyHeaders({
             'access-control-allow-origin': '*',
@@ -61,35 +61,6 @@ describe("Register...", () => {
         expect(await screen.findByText('Password is different of confirmation password', {exact: false})).toBeTruthy()
          
     })
-
-
-
-    /*it("Show error messsage and Avoid call 'doLogin", async () => {                  
-
-        nock('http://localhost:4000')        
-        .intercept('/user/login', 'OPTIONS' )        
-        .reply(200)        
-        .defaultReplyHeaders({
-            'access-control-allow-origin': '*',
-            'access-control-allow-credentials': 'true',  
-            'Access-Control-allow-Headers': '*'                     
-        })
-        .post('/user/login')        
-        .reply(401, {
-            error: [{param: 'User Name/Password', msg: "Password or UserName is invalid"}]
-        })
-               
-        
-        render(<SignUp/>, {wrapper: BrowserRouter})
-
-        const buttonSendList = await screen.findByTestId('buttonRegister')   
-
-        fireEvent.click(buttonSendList)
-                     
-        await waitFor(() =>expect(mockedDoLogin).toBeCalledTimes(0))
-        expect( await screen.findByText('Password or UserName is invalid', {exact: false})).toBeTruthy()
-         
-    })    */
 
 });
 
