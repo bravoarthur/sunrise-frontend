@@ -1,51 +1,50 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import styles from "./AddProducts.module.scss"
 import useApi from '../../helpers/SunriseAPI'
 import { CategoriesType, ErrorType } from '../../types/types'
 
 function AddProducts() {
 
-    const api = useApi       
+    const api = useApi
 
     const [name, setName] = useState('')
-    const [unit, setUnit] = useState('')   
+    const [unit, setUnit] = useState('')
     const [productCategorie, setProductCategorie] = useState('')
-    const [img, setImg] = useState<File | undefined>(undefined) 
+    const [img, setImg] = useState<File | undefined>(undefined)
     const [disabled, setDisabled] = useState(false)
     const [error, setError] = useState({} as ErrorType)
     const [success, setSuccess] = useState('')
-    const [categories, setCategories] = useState([] as CategoriesType[])    
+    const [categories, setCategories] = useState([] as CategoriesType[])
     //const [masterPass, setMasterPass] = useState('')
 
-    const units = ["Kg", 'Bag', 'Tray', 'Box', 'Unit','Default']
-    
+    const units = ["Kg", 'Bag', 'Tray', 'Box', 'Unit', 'Default']
+
     useEffect(() => {
         const getCats = async () => {
-            
-            const catlist = await  api.getCategories()
 
-            if(catlist.error) {
-                setError(catlist.error[0])                           
+            const catlist = await api.getCategories()
+
+            if (catlist.error) {
+                setError(catlist.error[0])
                 setDisabled(false)
-            } else {                
+            } else {
                 setCategories(catlist)
-            }            
+            }
         }
         getCats()
-    }, [api])    
+    }, [api])
 
-    
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
         event.preventDefault()
-        setDisabled(true) 
-        setError({} as ErrorType)  
+        setDisabled(true)
+        setError({} as ErrorType)
         console.log(productCategorie)
         console.log(unit)
         const dataForm = new FormData()
 
-        if(img) {
+        if (img) {
             dataForm.append('img', img)
             dataForm.append('unit', unit)
             dataForm.append('newProduct', name)
@@ -53,7 +52,7 @@ function AddProducts() {
 
             console.log(img)
             console.log(dataForm)
-           
+
         } else {
             dataForm.append('unit', unit)
             dataForm.append('newProduct', name)
@@ -65,46 +64,46 @@ function AddProducts() {
 
         const json = await api.addProduct(dataForm)
 
-        if(json.error) {
-            setError(json.error[0])           
+        if (json.error) {
+            setError(json.error[0])
             setDisabled(false)
             return
-        } else {            
+        } else {
             setDisabled(false)
             setName('')
             setUnit('')
             setProductCategorie('')
-            setSuccess('Product Added Successfully')  
+            setSuccess('Product Added Successfully')
             setTimeout(() => {
                 setSuccess('')
-            },5000)             
+            }, 5000)
         }
     }
 
-    return (  
+    return (
 
         <div className={styles.pageContainer}>
 
             <h1 className={styles.pageTitle}>Add New Product</h1>
 
             <div className={styles.pageArea} >
-                {error.param && 
-                <div className={styles.errorMessage}>
-                     {`${error.param} error - ${error.msg}`}
-                </div>
+                {error.param &&
+                    <div className={styles.errorMessage}>
+                        {`${error.param} error - ${error.msg}`}
+                    </div>
                 }
 
-                {success && 
-                <div className={styles.successMessage}>
-                    {`${success}`}
-                </div>
+                {success &&
+                    <div className={styles.successMessage}>
+                        {`${success}`}
+                    </div>
                 }
-                <form onSubmit={handleSubmit}>   
+                <form onSubmit={handleSubmit}>
 
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Name </div>
                         <div className={styles.areainput}>
-                            <input data-testid='nameProductInput' type="text" required disabled={disabled} value={name} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}/>
+                            <input data-testid='nameProductInput' type="text" required disabled={disabled} value={name} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)} />
                         </div>
                     </label>
 
@@ -119,7 +118,7 @@ function AddProducts() {
 
                             </select>
                         </div>
-                    </label>                    
+                    </label>
                     <label className={styles.area}>
                         <div className={styles.areatitle}>Category</div>
                         <div className={styles.areainput}>
@@ -135,15 +134,15 @@ function AddProducts() {
                             <input type="file" disabled={disabled} accept='image/jpeg' onChange={(event: React.ChangeEvent<HTMLInputElement>) => setImg(event?.currentTarget?.files?.[0])} />
                         </div>
                     </label>
-                    
-                    <div className={styles.areaButton}>                        
-                        
+
+                    <div className={styles.areaButton}>
+
                         <button disabled={disabled}>ADD ITEM</button>
-                        
+
                     </div>
                 </form>
             </div >
-            
+
         </div >
     );
 }

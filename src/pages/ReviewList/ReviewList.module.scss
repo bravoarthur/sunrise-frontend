@@ -6,132 +6,121 @@
     flex-direction: column;
     align-items: center;
     width: 360px;
-    background-color: #EEE;
-    margin: 0 auto;  
+    background-color: #eee;
+    margin: 0 auto;
 
     @media (min-width: $mobile) and (max-width: $mobile-xl) {
         width: $mobile;
-        
     }
 
     @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
         width: $mobile-xl;
-        
     }
 
     @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
-        width: $desktop-sm
-        
+        width: $desktop-sm;
     }
 
     @media (min-width: $desktop-xl) {
         width: $desktop-xl;
-        
     }
-    
 
     .title {
         display: flex;
         width: 100%;
         justify-content: center;
-        padding: 20px; 
-        font-weight: 600;   
-    }    
+        padding: 20px;
+        font-weight: 600;
+    }
 }
 
 .tableContainer {
-
     display: flex;
     min-width: 85%;
     flex-direction: column;
-    background-color: #FFF;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 0px 8px #999;
     padding-bottom: 30px;
-    margin-bottom: 40px;    
-   
+    margin-bottom: 40px;
+
     .tableBox {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: flex-start;
         margin-top: 20px;
-        
-        
+
         .tableInput {
             font-size: 11px;
             width: 60%;
             padding: 5px;
-            margin: 10px;  
+            margin: 10px;
             height: 5px;
-                       
+
             td {
                 height: 37px;
             }
-            
-            td:first-child {                
-                width: 60%; 
-                border-bottom-left-radius: 8px;  
-                border-top-left-radius: 8px; 
+
+            td:first-child {
+                width: 60%;
+                border-bottom-left-radius: 8px;
+                border-top-left-radius: 8px;
                 vertical-align: center;
                 padding: 3px 7px;
-            }            
+            }
 
-            td:nth-child(2) {                
-                width: 17%;                
+            td:nth-child(2) {
+                width: 17%;
                 white-space: nowrap;
                 text-align: center;
             }
 
-            td:last-child {                
+            td:last-child {
                 width: 23%;
                 text-align: center;
-                border-bottom-right-radius: 8px;  
-                border-top-right-radius: 8px; 
+                border-bottom-right-radius: 8px;
+                border-top-right-radius: 8px;
             }
 
-            .divergentColor {            
+            .divergentColor {
                 background-color: $table-tr-color;
                 color: red;
             }
             .equalColor {
                 background-color: $table-tr-color;
-            }            
-            .divergentWhite {                
+            }
+            .divergentWhite {
                 color: red;
             }
-            .equalWhite{
+            .equalWhite {
                 color: black;
             }
-        }        
-    }    
+        }
+    }
 
     @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
-       .tableBox {
-            .tableInput{
+        .tableBox {
+            .tableInput {
                 width: 50%;
             }
-       }
-        
+        }
     }
 
-    @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {                  
-
+    @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
         .tableBox {
-            .tableInput{
+            .tableInput {
                 font-size: 14px;
-            }           
-            
-        }       
+            }
+        }
     }
 
-    @media (min-width: $desktop-xl) {        
-
+    @media (min-width: $desktop-xl) {
         .tableBox {
-            .tableInput{
+            .tableInput {
                 font-size: 14px;
-            }   
-        }      
+            }
+        }
     }
 }
 
@@ -139,44 +128,41 @@
     display: flex;
     margin-bottom: 20px;
 
-    .buttonClose{
+    .buttonClose {
         background-color: $action-button;
         border: 0;
         outline: 0;
         padding: 9px 7px;
         border-radius: 4px;
-        color: #FFF;
+        color: #fff;
         font-size: 9px;
         cursor: pointer;
         margin: 12px;
         transition: all ease 0.3s;
         font-weight: 600;
         width: 75px;
-                            
+
         &:hover {
-           background-color: $action-button-hover;
-       }  
+            background-color: $action-button-hover;
+        }
 
         @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
             font-size: 12px;
-            width: 100px;     
-        }    
-        @media (min-width: $desktop-xl) {        
+            width: 100px;
+        }
+        @media (min-width: $desktop-xl) {
             font-size: 12px;
             width: 100px;
         }
-    
     }
-   
-}  
-
+}
 
 .errorMessage {
     margin: 10px 0;
     background-color: $error-color;
     color: #000;
     border: 2px solid $error-border;
-    padding: 10px
+    padding: 10px;
 }
 
 .successMessage {
@@ -185,5 +171,4 @@
     color: #000;
     border: 2px solid $success-border;
     padding: 10px;
-    
 }

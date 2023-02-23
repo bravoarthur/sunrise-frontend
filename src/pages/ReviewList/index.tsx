@@ -2,80 +2,80 @@ import styles from './ReviewList.module.scss'
 import useApi from '../../helpers/SunriseAPI'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { ErrorType, ListType} from '../../types/types'
+import { ErrorType, ListType } from '../../types/types'
 import TablePreview from '../../components/TablePreview'
 
 
 
 const ReviewList = () => {
-    
-    let {id} = useParams()
-    
+
+    let { id } = useParams()
+
     const api = useApi
-    
+
     //const [products, setProducts] = useState([] as ProductsType[])
-    const [orderList, setOrderList] = useState([] as ListType[])    
-    const [list, setList] = useState([] as ListType[]) 
+    const [orderList, setOrderList] = useState([] as ListType[])
+    const [list, setList] = useState([] as ListType[])
     const [error, setError] = useState({} as ErrorType)
     const [success, setSuccess] = useState({
         param: '',
         msg: ''
-    })   
-      
+    })
+
 
     useEffect(() => {
         const getOrder = async () => {
-            if(!id) {  
+            if (!id) {
                 return
-            }           
-            const order = await  api.getOrderItem({}, id) 
-            if(order.error) {
+            }
+            const order = await api.getOrderItem({}, id)
+            if (order.error) {
                 setError(order.error[0])
-            } else {                
+            } else {
                 setOrderList(order.listOrder)
                 setList(order.listCheck)
-            }             
+            }
         }
         getOrder()
-    }, [api, id])          
+    }, [api, id])
 
-    
+
     const handleCloseOrder = async () => {
 
-        setError({param: '', msg: ''})
+        setError({ param: '', msg: '' })
 
         const json = await api.updateCloseOrder(id)
 
-            if(json.error) {
-                setError(json.error[0])
-                
-            } else {
-                setSuccess({param: 'Order', msg: 'Order Closed Successfully'})
-                setTimeout(() => {
-                    setSuccess({param: '', msg: ''})                    
-                    window.location.href = '/'
-                }, 2500)
-            } 
+        if (json.error) {
+            setError(json.error[0])
+
+        } else {
+            setSuccess({ param: 'Order', msg: 'Order Closed Successfully' })
+            setTimeout(() => {
+                setSuccess({ param: '', msg: '' })
+                window.location.href = '/'
+            }, 2500)
+        }
     }
-    
+
 
 
     return (
-        <div className={styles.pageContainer}> 
+        <div className={styles.pageContainer}>
 
             {
-                error.param && 
+                error.param &&
                 <div className={styles.errorMessage}>
                     {`${error.param} error - ${error.msg}`}
                 </div>
             }
 
             {
-                success.param && 
+                success.param &&
                 <div className={styles.successMessage}>
                     {`${success.msg}`}
                 </div>
-            }           
+            }
 
             <div className={styles.title}>
                 Review Order
@@ -94,27 +94,27 @@ const ReviewList = () => {
                         <tbody>
 
                             {
-                                orderList.map((item, index) => 
+                                orderList.map((item, index) =>
 
-                            <tr key={item.idProduct} className={(index%2 ===0)? item.divergent? styles.divergentColor : styles.equalColor : item.divergent? styles.divergentWhite : styles.equalWhite}>
-                                <td>{item.product}</td>
-                                <td>{item.unit}</td>
-                                <td>{item.qtd}</td>
-                            </tr>                            
+                                    <tr key={item.idProduct} className={(index % 2 === 0) ? item.divergent ? styles.divergentColor : styles.equalColor : item.divergent ? styles.divergentWhite : styles.equalWhite}>
+                                        <td>{item.product}</td>
+                                        <td>{item.unit}</td>
+                                        <td>{item.qtd}</td>
+                                    </tr>
 
-                            )}
-                        </tbody>                
-                    </table>  
-                    <TablePreview list={list}/>                   
+                                )}
+                        </tbody>
+                    </table>
+                    <TablePreview list={list} />
                 </div>
 
             </div>
 
-            
+
             <div className={styles.buttonsArea}>
-                
+
                 <button className={styles.buttonClose} onClick={handleCloseOrder}>Close Order</button>
-            </div>            
+            </div>
         </div>
 
     )

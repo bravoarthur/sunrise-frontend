@@ -1,5 +1,5 @@
 import styles from './Header.module.scss'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { doLogout, isLogged } from '../../helpers/authHandler'
 
 function Header() {
@@ -8,7 +8,7 @@ function Header() {
 
     const handleLogOut = () => {
         doLogout()
-        window.location.href = '/'               
+        window.location.href = '/'
     }
 
 
@@ -19,8 +19,6 @@ function Header() {
                 <div className={styles.logo}>
                     <Link to='/'>
                         <span className={styles.logo1}>Sunrise</span>
-                        
-
                     </Link>
                 </div>
                 <nav>
@@ -33,12 +31,12 @@ function Header() {
                                 </li>
                                 <li>
                                     <button onClick={handleLogOut}>Logout</button>
-                                </li>   
+                                </li>
                                 <li>
                                     <Link to="/neworder" className={styles.sellButton}>NEW ORDER</Link>
                                 </li>
                             </>
-                        
+
                         }
 
                         {!logged &&
@@ -52,7 +50,7 @@ function Header() {
                                 </li>
                             </>
                         }
-                        
+
                     </ul>
                 </nav>
             </div>

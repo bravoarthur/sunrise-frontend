@@ -6,61 +6,55 @@
     flex-direction: column;
     align-items: center;
     width: $mobile-sm;
-    background-color: #EEE;
+    background-color: #eee;
     margin: 0 auto;
 
     @media (min-width: $mobile) and (max-width: $mobile-xl) {
         width: $mobile;
-        
     }
 
     @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
         width: $mobile-xl;
-        
     }
 
     @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
-        width: $desktop-sm
-        
+        width: $desktop-sm;
     }
 
     @media (min-width: $desktop-xl) {
         width: $desktop-xl;
-        
     }
 
     .topInputs {
         display: flex;
         width: 100%;
         justify-content: center;
-        padding: 15px; 
-        margin-bottom: 15px;       
+        padding: 15px;
+        margin-bottom: 15px;
 
         .inputArea {
-            display: flex;   
-            flex-direction: column;                     
+            display: flex;
+            flex-direction: column;
             align-items: center;
             font-size: 12px;
             input {
                 width: 85%;
                 margin: 0 10px;
                 font-size: 12px;
-            }         
-        }        
-    }  
+            }
+        }
+    }
 }
 
 .tableContainer {
-
     display: flex;
-    max-width: 95%;    
-    background-color: #FFF;
+    max-width: 95%;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 0px 12px #999;
     padding-bottom: 30px;
-    margin-bottom: 60px; 
+    margin-bottom: 60px;
     justify-content: center;
-        
 
     .tableBox {
         display: flex;
@@ -72,67 +66,65 @@
             font-size: 11px;
             width: 95%;
             padding: 5px;
-            margin: 5px;  
-            height: 5px;             
-            
+            margin: 5px;
+            height: 5px;
+
             input {
                 width: 60%;
                 min-width: 35px;
                 font-size: 13px;
             }
-            
+
             .thProduct {
                 width: 100px;
                 text-align: left;
                 font-size: 11px;
             }
-    
+
             .thUnit {
                 text-align: center;
-                font-size: 11px;    
+                font-size: 11px;
             }
-    
+
             .thQtd {
                 font-size: 11px;
-    
             }
-            
-            td,tr {
+
+            td,
+            tr {
                 height: 50px;
             }
-            
-            td:first-child {                
-                width: 15%; 
-                border-bottom-left-radius: 8px;  
-                border-top-left-radius: 8px; 
+
+            td:first-child {
+                width: 15%;
+                border-bottom-left-radius: 8px;
+                border-top-left-radius: 8px;
                 vertical-align: center;
-                
             }
-    
-            td:nth-child(2) {               
-                width: 45%; 
+
+            td:nth-child(2) {
+                width: 45%;
                 text-align: left;
                 font-weight: 550;
             }
-    
-            td:nth-child(3) {                
-                width: 17%;                
+
+            td:nth-child(3) {
+                width: 17%;
                 white-space: nowrap;
                 text-align: center;
             }
-    
-            td:last-child {                
+
+            td:last-child {
                 width: 23%;
                 text-align: center;
-                border-bottom-right-radius: 8px;  
-                border-top-right-radius: 8px; 
+                border-bottom-right-radius: 8px;
+                border-top-right-radius: 8px;
             }
-    
+
             .trColor {
-            
                 background-color: $table-tr-color;
-            }            
-        }        
+            }
+        }
     }
 
     .tableDivergence {
@@ -140,41 +132,39 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: 10px;
-        
+
         .divergence {
-            display: flex;    
-            align-items: center;  
-            width: 70%;  
+            display: flex;
+            align-items: center;
+            width: 70%;
         }
 
         .buttons {
             display: flex;
             flex-direction: row;
-            justify-content: center;  
-    
+            justify-content: center;
+
             button {
                 background-color: $action-button;
                 border: 0;
                 outline: 0;
                 padding: 5px 10px;
                 border-radius: 4px;
-                color: #FFF;
+                color: #fff;
                 font-size: 13px;
                 cursor: pointer;
                 margin: 10px;
                 transition: all ease 0.3s;
-                            
+
                 &:hover {
-                background-color: $action-button-hover;
-                }             
-    
+                    background-color: $action-button-hover;
+                }
             }
         }
     }
 
     @media (min-width: $mobile) and (max-width: $mobile-xl) {
         width: 410px;
-        
     }
 
     @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
@@ -188,8 +178,7 @@
         min-width: 90%;
         .tableBox {
             width: 90%;
-        }         
-        
+        }
     }
 
     @media (min-width: $desktop-xl) {
@@ -202,36 +191,28 @@
                 input {
                     width: 35%;
                     font-size: 18px;
-                } 
-                
+                }
+
                 .thProduct {
-                    
                     font-size: 18px;
                 }
-        
+
                 .thUnit {
-                    
-                    font-size: 18px;    
+                    font-size: 18px;
                 }
-        
+
                 .thQtd {
                     font-size: 18px;
-        
                 }
             }
-        }   
-              
+        }
     }
-
 }
 
-
-
-.image {    
+.image {
     border-radius: 7px;
-    margin: 10px;   
+    margin: 10px;
 }
-
 
 .buttonSend {
     background-color: $action-button;
@@ -239,16 +220,14 @@
     outline: 0;
     padding: 5px 10px;
     border-radius: 4px;
-    color: #FFF;
+    color: #fff;
     font-size: 15px;
     cursor: pointer;
     margin-bottom: 30px;
-                
-    &:hover {
-       background-color: $action-button-hover;
-   }               
-    
 
+    &:hover {
+        background-color: $action-button-hover;
+    }
 }
 
 .errorMessage {
@@ -256,7 +235,7 @@
     background-color: $error-color;
     color: #000;
     border: 2px solid $error-border;
-    padding: 10px
+    padding: 10px;
 }
 
 .successMessage {
@@ -265,10 +244,8 @@
     color: #000;
     border: 2px solid $success-border;
     padding: 10px;
-    
 }
 
 .confirmClass {
-    display: none
+    display: none;
 }
-

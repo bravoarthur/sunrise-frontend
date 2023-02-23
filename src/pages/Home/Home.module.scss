@@ -3,9 +3,9 @@
 
 .pageContainer {
     max-width: 850px;
-    margin: 0 auto;        
+    margin: 0 auto;
     padding: 0 25px;
-      
+
     .pageTitle {
         font-size: 22px;
     }
@@ -16,70 +16,67 @@
     @media (min-width: $desktop-xl) {
         min-width: 70%;
         font-size: 12px;
-    }          
+    }
 }
 
 .butContainer {
-    display: flex; 
-    padding: 10px;    
-    margin: 10px 0px;   
-    width: 100%;    
+    display: flex;
+    padding: 10px;
+    margin: 10px 0px;
+    width: 100%;
     flex-wrap: wrap;
     justify-content: center;
 
-    .buttons{
-    
+    .buttons {
         background-color: $menu-button;
         border-radius: 4px;
-        color: #FFF;
+        color: #fff;
         padding: 5px 10px;
         text-decoration: none;
         margin-right: 10px;
         font-size: 13px;
         transition: all ease 0.4s;
-    
+
         &:hover {
             background-color: $menu-button-hover;
-        }        
-        
+        }
     }
-    
-    @media (max-width: $mobile) {  
-       .buttons {
-        font-size: 8px;
-        padding: 3px 7px;
-       }   
+
+    @media (max-width: $mobile) {
+        .buttons {
+            font-size: 8px;
+            padding: 3px 7px;
+        }
     }
 }
 
-
 .ordersContainer {
-    display: flex;  
-    background-color: #FFF;
-    flex-direction: column;    
+    display: flex;
+    background-color: #fff;
+    flex-direction: column;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0px 0px 5px #999;
-      
+
     .orderCard {
         display: flex;
         width: 100%;
         min-height: 100px;
         flex-wrap: wrap;
         justify-content: space-around;
-    
-        .item{
+
+        .item {
             background-color: $card-color;
             border-radius: 10px;
             font-size: 10px;
             padding: 10px;
-            width: 90%;    
+            width: 90%;
             margin: 5px 0;
             text-decoration: none;
             color: black;
             transition: all ease 0.4s;
-            &:hover{
-                border: 1px solid #AAA;
+            &:hover {
+                border: 1px solid #aaa;
                 background-color: $card-hover;
             }
             p {
@@ -91,14 +88,12 @@
 
             @media (min-width: $mobile) and (max-width: $mobile-xl) {
                 width: 45%;
-                
             }
-        
+
             @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
                 width: 45%;
-                
             }
-        
+
             @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
                 width: 30%;
                 font-size: 12px;
@@ -106,11 +101,9 @@
             @media (min-width: $desktop-xl) {
                 width: 30%;
                 font-size: 12px;
-            }            
-        } 
-            
-    }  
-    
+            }
+        }
+    }
 }
 
 .errorMessage {
@@ -118,7 +111,5 @@
     background-color: $error-color;
     color: #000;
     border: 2px solid $error-border;
-    padding: 10px
+    padding: 10px;
 }
-
-  

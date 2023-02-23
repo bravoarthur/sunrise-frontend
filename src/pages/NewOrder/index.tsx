@@ -10,7 +10,7 @@ import TablePreview from '../../components/TablePreview'
 const NewOrder = () => {
 
     const api = useApi
-            
+
     const [products, setProducts] = useState([] as ProductsType[])
     const [supliersList, setSupliersList] = useState([] as SuplierType[])
     const [list, setList] = useState([] as ListType[])
@@ -26,14 +26,14 @@ const NewOrder = () => {
         msg: ''
     })
     const userAdmin = Cookies.get('user')
-        
+
     useEffect(() => {
         const getProducts = async () => {
-            const pList = await  api.getProductsList({q: textFilter, cat: catFilter})            
-            if(pList.error) {
-                setError(pList.error[0])                           
+            const pList = await api.getProductsList({ q: textFilter, cat: catFilter })
+            if (pList.error) {
+                setError(pList.error[0])
                 setBlocked(false)
-            } else {                
+            } else {
                 setProducts(pList)
             }
         }
@@ -42,26 +42,26 @@ const NewOrder = () => {
 
     useEffect(() => {
         const getSupliersList = async () => {
-            const supList = await  api.getSupliersList({})   
-            if(supList.error) {
-                setError(supList.error[0])                           
+            const supList = await api.getSupliersList({})
+            if (supList.error) {
+                setError(supList.error[0])
                 setBlocked(false)
-            } else {                
+            } else {
                 setSupliersList(supList)
-            }    
+            }
         }
         getSupliersList()
     }, [api])
 
     useEffect(() => {
         const getCategories = async () => {
-            const catList = await  api.getCategories() 
-            if(catList.error) {
-                setError(catList.error[0])                           
+            const catList = await api.getCategories()
+            if (catList.error) {
+                setError(catList.error[0])
                 setBlocked(false)
-            } else {                
+            } else {
                 setCategories(catList)
-            }   
+            }
         }
         getCategories()
     }, [api])
@@ -69,32 +69,33 @@ const NewOrder = () => {
 
     console.log(list)
 
-    const qtdHandler = (item: ProductsType, value:number) => {
-        
-        const verifier = list.findIndex(it => item.id===it.idProduct)
-        if(verifier > -1) {
+    const qtdHandler = (item: ProductsType, value: number) => {
+
+        const verifier = list.findIndex(it => item.id === it.idProduct)
+        if (verifier > -1) {
             const newList = list.map(item => item)
 
-            if(value === 0) {  
-                newList.splice(verifier, 1) 
-                newList.sort((a,b) => {
+            if (value === 0) {
+                newList.splice(verifier, 1)
+                newList.sort((a, b) => {
                     return a.product < b.product ? -1 : a.product > b.product ? 1 : 0;
                 });
                 setList(newList)
             } else {
                 newList[verifier].qtd = value
-                newList.sort((a,b) => {
+                newList.sort((a, b) => {
                     return a.product < b.product ? -1 : a.product > b.product ? 1 : 0;
                 });
                 setList(newList)
             }
-            
+
         } else {
 
-            if(value === 0) {
+            if (value === 0) {
                 return
             } else {
-                const newItem: ListType = {idProduct: item.id,
+                const newItem: ListType = {
+                    idProduct: item.id,
                     product: item.name,
                     unit: item.unit,
                     qtd: value,
@@ -103,46 +104,46 @@ const NewOrder = () => {
                 }
                 const newList = list.map(item => item)
                 newList.push(newItem)
-                newList.sort((a,b) => {
+                newList.sort((a, b) => {
                     return a.product < b.product ? -1 : a.product > b.product ? 1 : 0;
                 });
-                setList(newList)                       
+                setList(newList)
             }
-        }    
+        }
     }
-    
-    const handleSendOrder = async () => {        
-        
-        setError({param: '', msg: ''})
+
+    const handleSendOrder = async () => {
+
+        setError({ param: '', msg: '' })
         setBlocked(true)
-        if(!userAdmin) {
-            setError({param: 'User', msg: 'UserAdmin Invalid - Please login Again'})
+        if (!userAdmin) {
+            setError({ param: 'User', msg: 'UserAdmin Invalid - Please login Again' })
             setBlocked(false)
             return
         }
-        if(suplier ==='') {
-            setError({param: 'Suplier', msg: 'Plese Select the Suplier'})
+        if (suplier === '') {
+            setError({ param: 'Suplier', msg: 'Plese Select the Suplier' })
             setBlocked(false)
             return
-        } 
+        }
 
-        if(list.length === 0) {
-            setError({param: 'Order', msg: 'The List is Empty - Select at Least one item'})
+        if (list.length === 0) {
+            setError({ param: 'Order', msg: 'The List is Empty - Select at Least one item' })
             setBlocked(false)
             return
-        } 
+        }
         const json = await api.addOrder(userAdmin, suplier, list, description)
 
-        if(json.error) {
+        if (json.error) {
             setError(json.error[0])
             setBlocked(false)
         } else {
-            setSuccess({param: 'Order', msg: 'Order Created Successfully'})
+            setSuccess({ param: 'Order', msg: 'Order Created Successfully' })
             setTimeout(() => {
                 setList([])
                 setSuplier('')
-                setDescription('') 
-                setSuccess({param: '', msg: ''})
+                setDescription('')
+                setSuccess({ param: '', msg: '' })
                 setBlocked(false)
                 window.location.reload();
             }, 2500)
@@ -154,14 +155,14 @@ const NewOrder = () => {
         <div className={styles.pageContainer}>
 
             {
-                error.param && 
+                error.param &&
                 <div className={styles.errorMessage}>
                     {`${error.param} error - ${error.msg}`}
                 </div>
             }
 
             {
-                success.param && 
+                success.param &&
                 <div className={styles.successMessage}>
                     {`${success.msg}`}
                 </div>
@@ -172,7 +173,7 @@ const NewOrder = () => {
                 <label className={styles.inputDesc}>
                     <div>Note: </div>
                     <div>
-                        <input type="text" disabled={blocked} placeholder='Insert a note...'  value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)}/>
+                        <input type="text" disabled={blocked} placeholder='Insert a note...' value={description} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} />
                     </div>
                 </label>
                 <label className={styles.inputSuplier}>
@@ -184,10 +185,10 @@ const NewOrder = () => {
 
                         </select>
                     </div>
-                </label>                
-                
+                </label>
+
                 <button className={styles.buttonSend} disabled={blocked} onClick={handleSendOrder}>Send List</button>
-                 
+
 
             </div>
 
@@ -196,23 +197,23 @@ const NewOrder = () => {
                 <div className={styles.FiltersBox}>
 
                     <p>Filters</p>
-                               
+
                     <div className={styles.filterCategory}>
                         <select required disabled={blocked} value={catFilter} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setCatFilter(event.target.value)}>
                             <option value=''>Category/All</option>
                             {categories.map((item, index) => <option value={item._id} key={index}>{item.name}</option>)}
                         </select>
-                    </div>                        
-                               
-                    <div className={styles.filterText}>
-                        <input type="text" disabled={blocked} placeholder='Type a product...'  value={textFilter} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTextFilter(event.target.value)}/>
                     </div>
-                   
+
+                    <div className={styles.filterText}>
+                        <input type="text" disabled={blocked} placeholder='Type a product...' value={textFilter} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTextFilter(event.target.value)} />
+                    </div>
+
 
                 </div>
 
                 <div className={styles.tableBox}>
-                    
+
                     <table className={styles.tableInput} cellSpacing={0}>
                         <thead>
                             <tr>
@@ -225,26 +226,26 @@ const NewOrder = () => {
                         <tbody>
 
                             {
-                                products.map((item, index) => 
+                                products.map((item, index) =>
 
-                            <tr key={item.id} className={(index%2 ===0)? styles.trColor : styles.trWhite}>
-                                
-                                <td><img src={item.image} width={40} height={40} className={styles.image} alt=''></img></td>
-                                <td>{item.name}</td>
-                                <td>{item.unit}</td>
-                                <td><input data-testid={`newOrderProductQtd${index}`} type="number" disabled={blocked} min={0}  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {qtdHandler(item, Number(event.target.value))}}/></td>
-                            </tr>                            
+                                    <tr key={item.id} className={(index % 2 === 0) ? styles.trColor : styles.trWhite}>
 
-                            )}
-                        </tbody>                
-                    </table>   
+                                        <td><img src={item.image} width={40} height={40} className={styles.image} alt=''></img></td>
+                                        <td>{item.name}</td>
+                                        <td>{item.unit}</td>
+                                        <td><input data-testid={`newOrderProductQtd${index}`} type="number" disabled={blocked} min={0} onChange={(event: React.ChangeEvent<HTMLInputElement>) => { qtdHandler(item, Number(event.target.value)) }} /></td>
+                                    </tr>
 
-                    <TablePreview list={list}/>                   
-                    
+                                )}
+                        </tbody>
+                    </table>
+
+                    <TablePreview list={list} />
+
                 </div>
 
-            </div>           
-                     
+            </div>
+
         </div>
 
     )

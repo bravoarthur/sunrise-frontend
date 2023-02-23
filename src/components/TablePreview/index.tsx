@@ -5,10 +5,10 @@ interface listProps {
     list: ListType[]
 }
 
-const TablePreview = ({list}: listProps) => {   
-    
+const TablePreview = ({ list }: listProps) => {
 
-    return (     
+
+    return (
 
         <table className={styles.tablePreview}>
             <thead>
@@ -21,18 +21,18 @@ const TablePreview = ({list}: listProps) => {
             <tbody>
 
                 {
-                    list.map((it, index) => 
+                    list.map((it, index) =>
 
-                <tr key={it.idProduct}>
-                    <td>{it.product}</td>
-                    <td>{it.unit}</td>
-                    <td>{it.qtd}</td>
-                </tr>                            
+                        <tr key={it.idProduct}>
+                            <td>{it.product}</td>
+                            <td>{it.unit}</td>
+                            <td>{it.qtd}</td>
+                        </tr>
 
-                )}
-                
-            </tbody>                
-        </table>      
+                    )}
+
+            </tbody>
+        </table>
     )
 }
 

@@ -6,60 +6,53 @@
     flex-direction: column;
     align-items: center;
     width: $mobile-sm;
-    background-color: #EEE;
-    margin: 0 auto;  
+    background-color: #eee;
+    margin: 0 auto;
 
     @media (min-width: $mobile) and (max-width: $mobile-xl) {
         width: $mobile;
-        
     }
 
     @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
         width: $mobile-xl;
-        
     }
 
     @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
-        width: $desktop-sm
-        
+        width: $desktop-sm;
     }
 
     @media (min-width: $desktop-xl) {
         width: $desktop-xl;
-        
     }
-    
 
     .descSuplier {
         display: flex;
         width: 100%;
         justify-content: center;
-        padding: 15px;        
+        padding: 15px;
 
         .inputDesc {
-            display: flex;   
-            flex-direction: column;                     
+            display: flex;
+            flex-direction: column;
             align-items: center;
             font-size: 12px;
             input {
                 width: 85%;
                 margin: 0 10px;
                 font-size: 12px;
-            }                
-            
+            }
         }
 
         .inputSuplier {
-            display: flex;        
-            flex-direction: column;    
-            align-items: center;  
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             font-size: 11px;
             select {
                 width: 80%;
                 margin: 0 10px;
                 font-size: 13.5px;
-            }           
-    
+            }
         }
 
         .buttonSend {
@@ -68,110 +61,107 @@
             outline: 0;
             padding: 9px 7px;
             border-radius: 4px;
-            color: #FFF;
+            color: #fff;
             font-size: 9px;
             cursor: pointer;
             margin: 12px;
             transition: all ease 0.3s;
             font-weight: 600;
             width: 75px;
-                        
+
             &:hover {
-               background-color: $action-button-hover;
-           }     
-        }  
-
-        @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
-
-            .inputDesc {                
-                flex-direction: row;
-                font-size:13px;
-                input {
-                    width: 70%;                    
-                    font-size: 13px;
-                }     
-            }
-    
-            .inputSuplier {
-                flex-direction: row;
-                font-size: 13px;   
-                select {
-                    font-size: 16px;
-                    width: 70%;                   
-                }    
-            }
-    
-            .buttonSend {                
-                padding: 8px 15px;                
-                font-size: 14px;                
-                margin: 25px;                
-                font-weight: 400;
-                width: 100px;  
+                background-color: $action-button-hover;
             }
         }
-    
-        @media (min-width: $desktop-xl) {
-            .inputDesc {                
+
+        @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
+            .inputDesc {
                 flex-direction: row;
-                font-size: 15px; 
+                font-size: 13px;
                 input {
-                    width: 70%;                    
-                    font-size: 14px;
-                }   
+                    width: 70%;
+                    font-size: 13px;
+                }
             }
-            .inputSuplier {           
+
+            .inputSuplier {
                 flex-direction: row;
-                font-size: 15px;   
+                font-size: 13px;
+                select {
+                    font-size: 16px;
+                    width: 70%;
+                }
+            }
+
+            .buttonSend {
+                padding: 8px 15px;
+                font-size: 14px;
+                margin: 25px;
+                font-weight: 400;
+                width: 100px;
+            }
+        }
+
+        @media (min-width: $desktop-xl) {
+            .inputDesc {
+                flex-direction: row;
+                font-size: 15px;
+                input {
+                    width: 70%;
+                    font-size: 14px;
+                }
+            }
+            .inputSuplier {
+                flex-direction: row;
+                font-size: 15px;
                 select {
                     font-size: 17px;
-                    width: 70%;                   
-                }     
-            }    
-            .buttonSend {                
-                padding: 8px 15px;                
-                font-size: 14px;                
-                margin: 25px;                
-                font-weight: 400;
-                width: 100px;   
+                    width: 70%;
+                }
             }
-        }      
-    }    
+            .buttonSend {
+                padding: 8px 15px;
+                font-size: 14px;
+                margin: 25px;
+                font-weight: 400;
+                width: 100px;
+            }
+        }
+    }
 }
 
 .tableContainer {
-
     display: flex;
     max-width: 95%;
     flex-direction: column;
-    background-color: #FFF;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 0px 8px #999;
     padding-bottom: 30px;
-    margin-bottom: 70px;    
+    margin-bottom: 70px;
 
-    .FiltersBox{
+    .FiltersBox {
         display: flex;
         width: 100%;
         justify-content: center;
-        align-items: center;       
+        align-items: center;
         margin: 20px 0;
         height: 30px;
         font-size: 12px;
-        
 
-        .filterCategory{
+        .filterCategory {
             margin-left: 12px;
-            margin-right: 10px; 
+            margin-right: 10px;
             select {
                 width: 90%;
                 font-size: 10px;
-            }   
+            }
         }
         .filterText {
             margin-left: 10px;
             input {
                 width: 80%;
-                font-size: 9px
+                font-size: 9px;
             }
         }
     }
@@ -181,21 +171,20 @@
         flex-direction: column-reverse;
         justify-content: space-around;
         align-items: center;
-        
-        
+
         .tableInput {
             font-size: 11px;
             width: 95%;
             padding: 5px;
-            margin: 5px;  
-            height: 5px;             
-            
+            margin: 5px;
+            height: 5px;
+
             input {
                 width: 75%;
                 min-width: 35px;
                 font-size: 13px;
             }
-            
+
             .thProduct {
                 width: 100px;
                 text-align: left;
@@ -204,56 +193,50 @@
 
             .thUnit {
                 font-size: 11px;
-
             }
 
             .thQtd {
                 font-size: 11px;
-
             }
-            
+
             td {
                 height: 70px;
             }
-            
-            td:first-child {                
-                width: 15%; 
-                border-bottom-left-radius: 8px;  
-                border-top-left-radius: 8px; 
+
+            td:first-child {
+                width: 15%;
+                border-bottom-left-radius: 8px;
+                border-top-left-radius: 8px;
                 vertical-align: center;
-                
             }
 
-            td:nth-child(2) {               
-                width: 45%; 
+            td:nth-child(2) {
+                width: 45%;
                 text-align: left;
                 font-weight: 550;
             }
 
-            td:nth-child(3) {                
-                width: 17%;                
+            td:nth-child(3) {
+                width: 17%;
                 white-space: nowrap;
                 text-align: center;
             }
 
-            td:last-child {                
+            td:last-child {
                 width: 23%;
                 text-align: center;
-                border-bottom-right-radius: 8px;  
-                border-top-right-radius: 8px; 
+                border-bottom-right-radius: 8px;
+                border-top-right-radius: 8px;
             }
 
             .trColor {
-            
                 background-color: $table-tr-color;
             }
-            
-        }        
-    }    
+        }
+    }
 
     @media (min-width: $mobile-xl) and (max-width: $desktop-sm) {
         min-width: 90%;
-        
     }
 
     @media (min-width: $desktop-sm) and (max-width: $desktop-xl) {
@@ -261,18 +244,17 @@
         padding-left: 5px;
         padding-right: 10px;
 
-        
-        .FiltersBox{            
-            font-size: 14px;            
-    
-            .filterCategory{                
-                select {                   
+        .FiltersBox {
+            font-size: 14px;
+
+            .filterCategory {
+                select {
                     font-size: 13px;
-                }   
+                }
             }
-            .filterText {                
-                input {                   
-                    font-size: 12.5px
+            .filterText {
+                input {
+                    font-size: 12.5px;
                 }
             }
         }
@@ -280,28 +262,25 @@
         .tableBox {
             flex-direction: row;
             align-items: flex-start;
-            
-            
+
             .tableInput {
-                margin-right: 5px; 
-                margin-left: 25px; 
+                margin-right: 5px;
+                margin-left: 25px;
                 width: 70%;
-                                                  
-                .thProduct {                    
+
+                .thProduct {
                     font-size: 13px;
                 }
-    
+
                 .thUnit {
-                    font-size: 13px;    
+                    font-size: 13px;
                 }
-    
+
                 .thQtd {
-                    font-size: 13px;    
-                }     
+                    font-size: 13px;
+                }
             }
-    
-            
-        }       
+        }
     }
 
     @media (min-width: $desktop-xl) {
@@ -309,59 +288,57 @@
         padding-left: 10px;
         padding-right: 20px;
 
-        .FiltersBox{            
-            font-size: 16px;            
-    
-            .filterCategory{                
-                select {  
+        .FiltersBox {
+            font-size: 16px;
+
+            .filterCategory {
+                select {
                     font-size: 15px;
-                }   
+                }
             }
-            .filterText {                
-                input {   
-                    font-size: 14.5px
+            .filterText {
+                input {
+                    font-size: 14.5px;
                 }
             }
         }
 
         .tableBox {
             flex-direction: row;
-            align-items: flex-start; 
+            align-items: flex-start;
 
             .tableInput {
                 font-size: 15px;
                 width: 60%;
                 padding: 5px;
-                margin: 10px;  
-                height: 10px; 
+                margin: 10px;
+                height: 10px;
 
                 input {
                     width: 60%;
                     min-width: 50px;
                     font-size: 14px;
                 }
-                                                              
-                .thProduct {                    
+
+                .thProduct {
                     font-size: 15px;
                 }
-    
+
                 .thUnit {
-                    font-size: 15px;    
+                    font-size: 15px;
                 }
-    
+
                 .thQtd {
-                    font-size: 15px;    
-                }    
-            }    
-            
-        }   
+                    font-size: 15px;
+                }
+            }
+        }
     }
 }
 
-
-.image {    
-   border-radius: 7px;
-   margin: 10px;   
+.image {
+    border-radius: 7px;
+    margin: 10px;
 }
 
 .errorMessage {
@@ -369,7 +346,7 @@
     background-color: $error-color;
     color: #000;
     border: 2px solid $error-border;
-    padding: 10px
+    padding: 10px;
 }
 
 .successMessage {
@@ -378,5 +355,4 @@
     color: #000;
     border: 2px solid $success-border;
     padding: 10px;
-    
 }

@@ -8,15 +8,15 @@ import { BodyType, ListType } from "../types/types"
 
 
 
-//const BASE_API = 'http://192.168.0.3:4000'
-const BASE_API = 'http://localhost:4000'
+const BASE_API = 'http://192.168.0.3:4000'
+//const BASE_API = 'http://localhost:4000'
 
 const apiFetchPost = async (endPoint: string, body: BodyType) => {
 
-    let token = Cookies.get('token') 
-    
-    let serverOff = {error: [] as object[] }   
-    const res = await fetch(BASE_API+endPoint, {
+    let token = Cookies.get('token')
+
+    let serverOff = { error: [] as object[] }
+    const res = await fetch(BASE_API + endPoint, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -24,45 +24,45 @@ const apiFetchPost = async (endPoint: string, body: BodyType) => {
             'Authorization': `Bearer ${token}`
         },
         //'x-access-token':
-        body: JSON.stringify(body),    
-        
-    }).catch(err => {
-        serverOff.error = [{param: 'Server', msg: "Server is not Available"}]
-        return err        
-    })    
+        body: JSON.stringify(body),
 
-    if( serverOff.error.length>0) {        
+    }).catch(err => {
+        serverOff.error = [{ param: 'Server', msg: "Server is not Available" }]
+        return err
+    })
+
+    if (serverOff.error.length > 0) {
         return serverOff
-    }    
+    }
     const json = await res.json()
-    
+
     console.log(json)
 
     return json
-    
+
 }
 
-const apiFetchFile = async (endPoint: string, body:FormData) => {
+const apiFetchFile = async (endPoint: string, body: FormData) => {
 
-    let token = Cookies.get('token') 
+    let token = Cookies.get('token')
 
-    let serverOff= {error: [] as object[]}
-    const res = await fetch(BASE_API+endPoint, {
+    let serverOff = { error: [] as object[] }
+    const res = await fetch(BASE_API + endPoint, {
         method: 'POST',
-        headers: {            
+        headers: {
             'Authorization': `Bearer ${token}`
-        },        
-        body: body,    
-        
-    }).catch(err => {
-        serverOff.error = [{param: 'Server', msg: "Server is not Available"}]
-        return err        
-    })    
+        },
+        body: body,
 
-    if( serverOff.error.length>0) {        
+    }).catch(err => {
+        serverOff.error = [{ param: 'Server', msg: "Server is not Available" }]
+        return err
+    })
+
+    if (serverOff.error.length > 0) {
         return serverOff
-    }    
-    
+    }
+
     const json = await res.json()
 
     /*if(json.notallowed) {
@@ -72,15 +72,15 @@ const apiFetchFile = async (endPoint: string, body:FormData) => {
     console.log(json)
 
     return json
-    
+
 }
 
 const apiFetchGet = async (endPoint: string, body: BodyType = {}) => {
 
-    let token = Cookies.get('token')     
-    
-    let serverOff= {error: [] as object[]}
-    const res = await fetch(`${BASE_API+endPoint}?${qs.stringify(body)}`, {
+    let token = Cookies.get('token')
+
+    let serverOff = { error: [] as object[] }
+    const res = await fetch(`${BASE_API + endPoint}?${qs.stringify(body)}`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -88,29 +88,29 @@ const apiFetchGet = async (endPoint: string, body: BodyType = {}) => {
             'Authorization': `Bearer${token}`
         },
         //'x-access-token':        
-    }).catch(err => {        
-        serverOff.error = [{param: 'Server', msg: "Server is not Available"}]
-        
-        return err        
-    })    
+    }).catch(err => {
+        serverOff.error = [{ param: 'Server', msg: "Server is not Available" }]
 
-    if( serverOff.error.length>0) {        
+        return err
+    })
+
+    if (serverOff.error.length > 0) {
         return serverOff
-    }    
-    
-    const json = await res.json()    
+    }
+
+    const json = await res.json()
     console.log(json)
 
     return json
-    
+
 }
 
 const apiFetchPut = async (endPoint: string, body: BodyType) => {
 
-    let token = Cookies.get('token') 
-    
-    let serverOff= {error: [] as object[]}
-    const res = await fetch(BASE_API+endPoint, {
+    let token = Cookies.get('token')
+
+    let serverOff = { error: [] as object[] }
+    const res = await fetch(BASE_API + endPoint, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -120,19 +120,19 @@ const apiFetchPut = async (endPoint: string, body: BodyType) => {
         //'x-access-token':
         body: JSON.stringify(body)
     }).catch(err => {
-        serverOff.error = [{param: 'Server', msg: "Server is not Available"}]
-        return err        
-    })    
+        serverOff.error = [{ param: 'Server', msg: "Server is not Available" }]
+        return err
+    })
 
-    if( serverOff.error.length>0) {        
+    if (serverOff.error.length > 0) {
         return serverOff
-    }    
-    
+    }
+
     const json = await res.json()
 
     console.log(json)
 
-    return json    
+    return json
 }
 
 
@@ -140,7 +140,7 @@ const SunriseAPI = {
 
     login: async (email: string, password: string) => {
 
-        const json = await apiFetchPost('/user/login', {email: email, password: password}) 
+        const json = await apiFetchPost('/user/login', { email: email, password: password })
 
         return json
 
@@ -148,68 +148,68 @@ const SunriseAPI = {
 
     register: async (name: string, email: string, password: string, masterPass: string) => {
 
-        const json = await apiFetchPost('/user/register', {email: email, password: password, name: name, masterPass: masterPass}) 
+        const json = await apiFetchPost('/user/register', { email: email, password: password, name: name, masterPass: masterPass })
 
         return json
 
     },
-   
-    
-    getCategories: async () => {        
-        const json = await apiFetchGet('/category/list', {})   
-        if (json.error) {            
+
+
+    getCategories: async () => {
+        const json = await apiFetchGet('/category/list', {})
+        if (json.error) {
             return json
-        }           
+        }
         return json.categoryList
     },
 
     getOrder: async (options: {}) => {
 
-        const json = await apiFetchGet('/order/list', options) 
+        const json = await apiFetchGet('/order/list', options)
         if (json.error) {
             return json
-        }    
-        
+        }
+
         return json.orderList
 
     },
 
     getOrderItem: async (options: {}, id: string) => {
 
-        const json = await apiFetchGet(`/order/item/${id}`, options) 
+        const json = await apiFetchGet(`/order/item/${id}`, options)
         if (json.error) {
             return json
-        }    
-        
+        }
+
         return json.order
 
     },
 
-    getProductsList: async (options: {}, ) => {
+    getProductsList: async (options: {},) => {
 
-        const json = await apiFetchGet(`/products/list`, options) 
+        const json = await apiFetchGet(`/products/list`, options)
         if (json.error) {
             return json
-        }    
-        
+        }
+
         return json.productsList
 
     },
 
-    getSupliersList: async (options: {}, ) => {
+    getSupliersList: async (options: {},) => {
 
-        const json = await apiFetchGet(`/suplier/list`, options) 
+        const json = await apiFetchGet(`/suplier/list`, options)
         if (json.error) {
             return json
-        }    
-        
+        }
+
         return json.suplierList
 
     },
 
     addProduct: async (files: FormData) => {
-        
-        const json = await apiFetchFile('/products/add', files) 
+
+        const json = await apiFetchFile('/products/add', files)
 
         return json
 
@@ -217,7 +217,7 @@ const SunriseAPI = {
 
     addCategory: async (name: string) => {
 
-        const json = await apiFetchPost('/category/add', {newCategory: name}) 
+        const json = await apiFetchPost('/category/add', { newCategory: name })
 
         return json
 
@@ -225,7 +225,7 @@ const SunriseAPI = {
 
     addSuplier: async (name: string) => {
 
-        const json = await apiFetchPost('/suplier/add', {newSuplier: name}) 
+        const json = await apiFetchPost('/suplier/add', { newSuplier: name })
 
         return json
 
@@ -233,27 +233,27 @@ const SunriseAPI = {
 
     addOrder: async (idAdm: string, idSuplier: string, listOrder: ListType[], desc: string) => {
 
-        const json = await apiFetchPost('/order/add', {idAdm: idAdm, idSuplier: idSuplier, listOrder: listOrder, desc: desc}) 
-
-        return json
-
-    },
-    
-    orderCheck: async (checkOrder: ListType[],  userChecker: string, idOrder: string| undefined, status: string, checkerDesc?: string, divergent?: number[]) => {
-
-        const json = await apiFetchPost('/order/check', {checkOrder: checkOrder, checkerDesc: checkerDesc, userChecker: userChecker, idOrder: idOrder, status: status, divergent: divergent}) 
+        const json = await apiFetchPost('/order/add', { idAdm: idAdm, idSuplier: idSuplier, listOrder: listOrder, desc: desc })
 
         return json
 
     },
 
-    updateCloseOrder: async (idOrder: string|undefined) => {
+    orderCheck: async (checkOrder: ListType[], userChecker: string, idOrder: string | undefined, status: string, checkerDesc?: string, divergent?: number[]) => {
 
-        const json = await apiFetchPut('/order/finish', {idOrder: idOrder}) 
+        const json = await apiFetchPost('/order/check', { checkOrder: checkOrder, checkerDesc: checkerDesc, userChecker: userChecker, idOrder: idOrder, status: status, divergent: divergent })
+
+        return json
+
+    },
+
+    updateCloseOrder: async (idOrder: string | undefined) => {
+
+        const json = await apiFetchPut('/order/finish', { idOrder: idOrder })
 
         return json
 
     },
 }
 
-export default  SunriseAPI
+export default SunriseAPI
