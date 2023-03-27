@@ -12,6 +12,7 @@ import AddCategory from './pages/AddCategory';
 import AddSuplier from './pages/AddSuplier';
 import NewOrder from './pages/NewOrder';
 import ReviewList from './pages/ReviewList';
+import PrivateRouteHandler from './helpers/PrivateRouteHandler';
 
 
 function App() {
@@ -26,11 +27,31 @@ function App() {
                     <Route path='/signin' element={<SignIn/>} />
                     <Route path='/signup' element={<SignUp/>}/> 
                     <Route path='/checkitem/:id' element={<CheckOrder/>}/> 
-                    <Route path='/review/:id' element={<ReviewList/>}/> 
-                    <Route path='/addproducts' element={<AddProducts/>}/> 
-                    <Route path='/addcategory' element={<AddCategory/>}/> 
-                    <Route path='/addsuplier' element={<AddSuplier/>}/> 
-                    <Route path='/neworder' element={<NewOrder/>}/>
+                    <Route path='/review/:id' element={
+                        <PrivateRouteHandler>
+                            <ReviewList/>
+                        </PrivateRouteHandler>
+                    }/> 
+                    <Route path='/addproducts' element={
+                        <PrivateRouteHandler>
+                            <AddProducts/>
+                        </PrivateRouteHandler>
+                    }/> 
+                    <Route path='/addcategory' element={
+                        <PrivateRouteHandler>
+                            <AddCategory/>
+                        </PrivateRouteHandler>
+                    }/> 
+                    <Route path='/addsuplier' element={
+                        <PrivateRouteHandler>
+                            <AddSuplier/>
+                        </PrivateRouteHandler>
+                    }/> 
+                    <Route path='/neworder' element={
+                        <PrivateRouteHandler>
+                            <NewOrder/>
+                        </PrivateRouteHandler>
+                    }/>
           </Routes>
         <Footer/>
       
